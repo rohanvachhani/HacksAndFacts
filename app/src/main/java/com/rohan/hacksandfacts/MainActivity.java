@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.gigamole.infinitecycleviewpager.OnInfiniteCyclePageTransformListener;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     ConstraintLayout rootView;
     int current_real_item = 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,17 +30,16 @@ public class MainActivity extends AppCompatActivity {
                 (HorizontalInfiniteCycleViewPager) findViewById(R.id.hicvp);
 
         listOfImages.add(R.drawable.velvet);
-        listOfImages.add(R.drawable.velvet);
-        listOfImages.add(R.drawable.velvet);
-        listOfImages.add(R.drawable.velvet);
+
         listOfImages.add(R.drawable.velvet);
         listOfImages.add(R.drawable.velvet);
         listOfImages.add(R.drawable.velvet);
 
-        final MyAdapter myAdapter = new MyAdapter(listOfImages, getBaseContext());
+        listOfImages.add(R.drawable.velvet);
+        MyAdapter myAdapter = new MyAdapter(listOfImages, this);
         infiniteCycleViewPager.setAdapter(myAdapter);
 
-        final OnInfiniteCyclePageTransformListener onInfiniteCyclePageTransformListener = new OnInfiniteCyclePageTransformListener() {
+       /* final OnInfiniteCyclePageTransformListener onInfiniteCyclePageTransformListener = new OnInfiniteCyclePageTransformListener() {
 
             @Override
             public void onPreTransform(View page, float position) {
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 //rootView.setBackground(infiniteCycleViewPager.getChildAt(current_real_item).findViewById(R.id.imageView));
 
             }
-        };
+        };*/
 
     }
 }
