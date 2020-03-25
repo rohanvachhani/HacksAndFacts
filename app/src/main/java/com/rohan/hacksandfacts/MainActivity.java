@@ -16,27 +16,22 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Integer> listOfImages = new ArrayList<>();
-    ConstraintLayout rootView;
-    int current_real_item = 0;
+    List<String> listOfImages = new ArrayList<>();
+    HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rootView = findViewById(R.id.root_view);
-        final HorizontalInfiniteCycleViewPager infiniteCycleViewPager =
-                (HorizontalInfiniteCycleViewPager) findViewById(R.id.hicvp);
 
-        listOfImages.add(R.drawable.velvet);
+        listOfImages.add("1");
+        listOfImages.add("2");
+        listOfImages.add("3");
 
-        listOfImages.add(R.drawable.velvet);
-        listOfImages.add(R.drawable.velvet);
-        listOfImages.add(R.drawable.velvet);
 
-        listOfImages.add(R.drawable.velvet);
-        MyAdapter myAdapter = new MyAdapter(listOfImages, this);
+        infiniteCycleViewPager = findViewById(R.id.hicvp);
+        MyAdapter myAdapter = new MyAdapter(this, listOfImages);
         infiniteCycleViewPager.setAdapter(myAdapter);
 
        /* final OnInfiniteCyclePageTransformListener onInfiniteCyclePageTransformListener = new OnInfiniteCyclePageTransformListener() {

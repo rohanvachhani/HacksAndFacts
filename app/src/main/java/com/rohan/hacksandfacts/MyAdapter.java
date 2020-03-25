@@ -10,6 +10,7 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,10 +21,11 @@ import java.util.List;
 
 public class MyAdapter extends PagerAdapter {
 
-    List<Integer> listOfImages;
+    List<String> listOfImages;
     Context context;
     LayoutInflater layoutInflater;
     ConstraintLayout c1, c2;
+    final int counter = 0;
 
     boolean isAnimationActive = false;
 
@@ -31,7 +33,7 @@ public class MyAdapter extends PagerAdapter {
     boolean flag = true;
 
 
-    public MyAdapter(List<Integer> listOfImages, Context context) {
+    public MyAdapter(Context context, List<String> listOfImages) {
         this.listOfImages = listOfImages;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
@@ -39,33 +41,44 @@ public class MyAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
 
-        View view = layoutInflater.from(context).inflate(R.layout.card_layout, container, false);
-//        ImageView imageView = view.findViewById(R.id.image_view_1);
-//        imageView.setImageResource(listOfImages.get(position));
+        final View main_view = layoutInflater.from(context).inflate(R.layout.card_layout, container, false);
+        TextView tv = main_view.findViewById(R.id.text_view_1);
+        tv.setText(listOfImages.get(position));
+        // ImageView imageView1 = view.findViewById(R.id.image_view_1);
+        // imageView1.setImageResource(listOfImages.get(position));
 
-        c1 = view.findViewById(R.id.first_side);
-        shareButton = view.findViewById(R.id.share_button);
-        c2 = view.findViewById(R.id.second_side);
-        backButton = view.findViewById(R.id.back_button);
-
-        c1.setVisibility(View.VISIBLE);
-        c2.setVisibility(View.GONE);
+       // c1 = (ConstraintLayout) view.findViewById(R.id.first_side);
+        shareButton = main_view.findViewById(R.id.share_button);
+        //c2 = (ConstraintLayout) view.findViewById(R.id.second_side);
+        backButton = main_view.findViewById(R.id.back_button);
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                TextView tv1 = v.findViewById(R.id.text_view_1);
+//                c1 = (ConstraintLayout) v.findViewById(R.id.first_side);
+//                shareButton = v.findViewById(R.id.share_button);
+//                c2 = (ConstraintLayout) v.findViewById(R.id.second_side);
+//                backButton = v.findViewById(R.id.back_button);
+//                c1.setVisibility(View.GONE);
+//                c2.setVisibility(View.VISIBLE);
+//                Toast.makeText(context, "Card " + tv1.getText().toString() + " is clicked", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
         shareButton.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View v) {
                 // Log.i("button", "share button clicked");
 
-                Toast.makeText(context, "Share button clicked", Toast.LENGTH_SHORT).show();
-                // anim_effect();
+                final ConstraintLayout c1 = (ConstraintLayout) main_view.findViewById(R.id.first_side);
+                //shareButton = v.findViewById(R.id.share_button);
+                final ConstraintLayout c2 = (ConstraintLayout) main_view.findViewById(R.id.second_side);
+                //backButton = v.findViewById(R.id.back_button);
 
-                c1.setVisibility(View.GONE);
-                c2.setVisibility(View.VISIBLE);
+                anim_effect(c1, c2);
 
             }
         });
@@ -74,12 +87,17 @@ public class MyAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 // anim_effect();
-                c1.setVisibility(View.VISIBLE);
-                c2.setVisibility(View.GONE);
+                final ConstraintLayout c1 = (ConstraintLayout) main_view.findViewById(R.id.first_side);
+                //shareButton = v.findViewById(R.id.share_button);
+                final ConstraintLayout c2 = (ConstraintLayout) main_view.findViewById(R.id.second_side);
+                //backButton = v.findViewById(R.id.back_button);
+               anim_effect(c1, c2);
+               c1.setVisibility(View.VISIBLE);
             }
         });
-        container.addView(view);
-        return view;
+
+        container.addView(main_view);
+        return main_view;
     }
 
     @Override
@@ -97,7 +115,7 @@ public class MyAdapter extends PagerAdapter {
         return view.equals(object);
     }
 
-    private void anim_effect() {
+    private void anim_effect(final ConstraintLayout c1, final ConstraintLayout c2) {
 
         int x = c1.getRight();
         int y = c1.getBottom();
