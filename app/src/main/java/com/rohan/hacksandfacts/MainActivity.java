@@ -2,6 +2,7 @@ package com.rohan.hacksandfacts;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         MyAdapter myAdapter = new MyAdapter(this, listOfImages);
         infiniteCycleViewPager.setAdapter(myAdapter);
+
+
+
 
        /* final OnInfiniteCyclePageTransformListener onInfiniteCyclePageTransformListener = new OnInfiniteCyclePageTransformListener() {
 
