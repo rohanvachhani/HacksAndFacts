@@ -55,12 +55,13 @@
 
             <ImageButton
                 android:id="@+id/share_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@android:color/transparent"
                 android:padding="30dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/share"
+                android:rotation="180"
+                android:scaleType="fitCenter"
+                android:src="@drawable/share"
                 app:layout_constraintBottom_toBottomOf="@+id/image_view_1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -69,17 +70,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/second_side"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/image_view_2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY"
                 android:background="@drawable/green_velvet"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -101,12 +102,14 @@
 
             <ImageButton
                 android:id="@+id/back_button"
+
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@android:color/transparent"
                 android:padding="30dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/back"
+                android:scaleType="fitCenter"
+                android:src="@drawable/back"
+
                 app:layout_constraintBottom_toBottomOf="@+id/image_view_2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
