@@ -1,24 +1,30 @@
 package com.rohan.hacksandfacts;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
-import com.gigamole.infinitecycleviewpager.OnInfiniteCyclePageTransformListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<String> listOfImages = new ArrayList<>();
+    List<String> listOfString = new ArrayList<>();
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
+
+    FirebaseDatabase firebaseDatabase;
+
+    private long startnow, endnow;
 
 
     @Override
@@ -26,14 +32,51 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listOfImages.add("1");
-        listOfImages.add("2");
-        listOfImages.add("3");
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        databaseReference.keepSynced(true);
 
 
-        infiniteCycleViewPager = findViewById(R.id.hicvp);
-        MyAdapter myAdapter = new MyAdapter(this, listOfImages);
-        infiniteCycleViewPager.setAdapter(myAdapter);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    startnow = android.os.SystemClock.uptimeMillis();
+
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        listOfString.add(ds.child("A").getValue().toString().trim());
+                        Log.i("data", ds.child("A").getValue().toString());
+                    }
+                    endnow = android.os.SystemClock.uptimeMillis();
+                    Log.d("MYTAG", "Execution time: " + (endnow - startnow) + " ms");
+
+                    // firebaseCallBack.onCallBack(listOfStrings);
+
+                    Log.i("final_data", "initial");
+                    for (String s : listOfString) {
+                        Log.i("final_data", s);
+                    }
+                    Toast.makeText(MainActivity.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
+
+                    if (listOfString.size() == 0) {
+
+                    }
+                    infiniteCycleViewPager = findViewById(R.id.hicvp);
+                    MyAdapter myAdapter = new MyAdapter(getApplicationContext(), listOfString);
+                    infiniteCycleViewPager.setAdapter(myAdapter);
+
+                } else {
+                    Toast.makeText(MainActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
 
 

@@ -13,13 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import java.util.List;
 
 public class MyAdapter extends PagerAdapter {
 
-    List<String> listOfImages;
+    List<String> listOfString;
     Context context;
     LayoutInflater layoutInflater;
     boolean isAnimationActive = false;
@@ -30,8 +29,8 @@ public class MyAdapter extends PagerAdapter {
     boolean flag = true;
 
 
-    public MyAdapter(Context context, List<String> listOfImages) {
-        this.listOfImages = listOfImages;
+    public MyAdapter(Context context, List<String> listOfString) {
+        this.listOfString = listOfString;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         pixelDensity = context.getResources().getDisplayMetrics().density;
@@ -43,7 +42,7 @@ public class MyAdapter extends PagerAdapter {
 
         final View main_view = layoutInflater.from(context).inflate(R.layout.card_layout, container, false);
         TextView tv = main_view.findViewById(R.id.text_view_1);
-        tv.setText(listOfImages.get(position));
+        tv.setText(listOfString.get(position));
         // ImageView imageView1 = view.findViewById(R.id.image_view_1);
         // imageView1.setImageResource(listOfImages.get(position));
 
@@ -108,7 +107,7 @@ public class MyAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return listOfImages.size();
+        return listOfString.size();
     }
 
     @Override
