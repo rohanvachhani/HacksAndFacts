@@ -13,8 +13,8 @@
         android:layout_width="400dp"
         android:layout_height="591dp"
         android:backgroundTint="@android:color/white"
-        app:cardBackgroundColor="#E6E6E6"
         android:visibility="gone"
+        app:cardBackgroundColor="#E6E6E6"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         app:cardUseCompatPadding="true"
@@ -23,11 +23,12 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitCenter"
             android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
             android:src="@drawable/oops_image" />
     </androidx.cardview.widget.CardView>
 
