@@ -2,9 +2,12 @@ package com.rohan.hacksandfacts;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.CursorAdapter;
 import android.widget.Toast;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
@@ -19,7 +22,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+
     List<String> listOfString = new ArrayList<>();
+
+    CardView c1;
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
     FirebaseDatabase firebaseDatabase;
@@ -33,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+        c1 = findViewById(R.id.oops_card);
+        infiniteCycleViewPager = findViewById(R.id.hicvp);
 
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         databaseReference.keepSynced(true);
@@ -59,48 +68,27 @@ public class MainActivity extends AppCompatActivity {
                     }
                     Toast.makeText(MainActivity.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
 
+                    // listOfString.clear();
                     if (listOfString.size() == 0) {
+                        c1.setVisibility(View.VISIBLE);
+                        infiniteCycleViewPager.setVisibility(View.GONE);
+                    } else {
+                        c1.setVisibility(View.GONE);
+                        infiniteCycleViewPager.setVisibility(View.VISIBLE);
 
+                        MyAdapter myAdapter = new MyAdapter(getApplicationContext(), listOfString);
+                        infiniteCycleViewPager.setAdapter(myAdapter);
                     }
-                    infiniteCycleViewPager = findViewById(R.id.hicvp);
-                    MyAdapter myAdapter = new MyAdapter(getApplicationContext(), listOfString);
-                    infiniteCycleViewPager.setAdapter(myAdapter);
-
                 } else {
                     Toast.makeText(MainActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
+                    Log.i("mytag", "in else no data snap shot is there!!!!");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(MainActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
-
-       /* final OnInfiniteCyclePageTransformListener onInfiniteCyclePageTransformListener = new OnInfiniteCyclePageTransformListener() {
-
-            @Override
-            public void onPreTransform(View page, float position) {
-
-            }
-
-            @Override
-            public void onPostTransform(View page, float position) {
-
-                int temp = infiniteCycleViewPager.getRealItem();
-
-                if (current_real_item != temp) {
-                    current_real_item = temp;
-                    Log.i("ip", String.valueOf(current_real_item));
-                }
-                //rootView.setBackground(infiniteCycleViewPager.getChildAt(current_real_item).findViewById(R.id.imageView));
-
-            }
-        };*/
-
     }
 }
