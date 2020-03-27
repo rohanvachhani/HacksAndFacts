@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.CursorAdapter;
@@ -33,11 +35,15 @@ public class MainActivity extends AppCompatActivity {
     private long startnow, endnow;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //splash screen shown first and then this code will be executed
+
+        //firebase code
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         c1 = findViewById(R.id.oops_card);

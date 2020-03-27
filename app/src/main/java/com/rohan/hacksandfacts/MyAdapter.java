@@ -26,7 +26,6 @@ public class MyAdapter extends PagerAdapter {
     float pixelDensity;
 
     ImageButton shareButton, backButton;
-    boolean flag = true;
 
 
     public MyAdapter(Context context, List<String> listOfString) {
