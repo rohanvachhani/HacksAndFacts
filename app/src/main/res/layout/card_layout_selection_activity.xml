@@ -22,6 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/first_side"
             android:layout_width="match_parent"
+            android:background="@drawable/yello_glossy_card_2"
             android:layout_height="match_parent"
             android:visibility="visible">
 
@@ -30,8 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:alpha="0.77"
-                android:background="#ffd503"
+                android:background="@drawable/border_outer"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
