@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">HacksAndFacts</string>
+    <string name="life_hacks">Life Hacks</string>
+    <string name="fun_facts">Fun Facts</string>
+    <string name="by_users">By Users</string>
 </resources>

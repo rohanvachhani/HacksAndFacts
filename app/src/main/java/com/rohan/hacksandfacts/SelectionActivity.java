@@ -1,13 +1,20 @@
 package com.rohan.hacksandfacts;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Pair;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
+import com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,31 +25,36 @@ public class SelectionActivity extends AppCompatActivity {
     ImageView logoImageView;
     List<String> listOfString;
 
-    HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
+    VerticalInfiniteCycleViewPager infiniteCycleViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCompat.postponeEnterTransition(this);
         setContentView(R.layout.activity_selection);
-        overridePendingTransition(0, 0);
+       // overridePendingTransition(0, 0);
 
+        infiniteCycleViewPager = findViewById(R.id.hicvp);
         logoImageView = findViewById(R.id.img_view);
         listOfString = new ArrayList<>();
 
+
         listOfString.add("Life Hacks");
+        listOfString.add("User's Choice");
+        listOfString.add("Fun Facts");
+        listOfString.add("User's Choice");
         listOfString.add("Fun Facts");
         listOfString.add("User's Choice");
 
-        Animation anim1 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-        logoImageView.startAnimation(anim1);
+        AdapterForSelectionList pagerAdapter = new AdapterForSelectionList(this, listOfString);
+        infiniteCycleViewPager.setAdapter(pagerAdapter);
 
-        infiniteCycleViewPager = findViewById(R.id.hicvp);
+    }
 
-        AdapterForSelectionList myAdapter = new AdapterForSelectionList(getApplicationContext(), listOfString);
-        infiniteCycleViewPager.setAdapter(myAdapter);
-
-
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
     }
 }

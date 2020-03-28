@@ -4,31 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".SelectionActivity">
 
 
     <ImageView
         android:id="@+id/img_view"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginStart="8dp"
-        android:src="@drawable/handf_without_blur"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/tree_logo"
         android:transitionName="logoTransition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ImageView>
 
-    <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
+    <com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager
         android:id="@+id/hicvp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
         android:scrollbarFadeDuration="400"
         app:icvp_center_page_scale_offset="30dp"
         app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
         app:icvp_max_page_scale="0.8"
         app:icvp_medium_scaled="true"
-        app:icvp_min_page_scale="0.5"
+        app:icvp_min_page_scale="0.55"
         app:icvp_min_page_scale_offset="5dp"
         app:icvp_scroll_duration="500"
         app:layout_constraintBottom_toBottomOf="parent"

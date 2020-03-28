@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="400dp"
-        android:layout_height="591dp"
-        android:backgroundTint="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+
         app:cardBackgroundColor="#E6E6E6"
         app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:cardUseCompatPadding="true"
+        app:cardElevation="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -29,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:background="@drawable/red_velvet"
+                android:alpha="0.77"
+                android:background="#ffd503"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -42,22 +44,18 @@
                 android:id="@+id/text_view_1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="130dp"
-                android:fontFamily="@font/merienda_one"
+
+                android:fontFamily="@font/product_sans_black"
                 android:gravity="center"
+                android:padding="0dp"
                 android:text="Text here"
                 android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="60sp"
+                android:textColor="@android:color/black"
+                android:textSize="45sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.58"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/image_view_1"
-                app:layout_constraintVertical_bias="0.64" />
+                app:layout_constraintStart_toStartOf="@+id/image_view_1"
+                app:layout_constraintTop_toTopOf="@+id/image_view_1" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

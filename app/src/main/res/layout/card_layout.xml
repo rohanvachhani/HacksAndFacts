@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,7 +14,7 @@
         android:backgroundTint="@android:color/white"
         app:cardBackgroundColor="#E6E6E6"
         app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
+        app:cardElevation="15dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:background="@drawable/red_velvet"
+                android:background="@drawable/yello_glossy_card"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,11 +50,11 @@
                 android:layout_marginTop="100dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="130dp"
-                android:fontFamily="@font/merienda_one"
+                android:fontFamily="@font/product_sans_black"
                 android:gravity="center"
-                android:text="Gabriela is a serif typeface with soft shapes, and special terminal forms which are shaped like curls. They connect each letter to create attractive word shapes and text blocks with a fine texture. In small bodies of text she works well for reading, and in headlines provides interesting details to catch the eye."
+                android:text="Gabriela is a serif typeface with soft shapes, and special terminal forms which are shaped like curls. They connect each letter to create attractive."
                 android:textAlignment="center"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,14 +63,27 @@
                 app:layout_constraintTop_toTopOf="@+id/image_view_1"
                 app:layout_constraintVertical_bias="0.64" />
 
+<!--            <ImageView-->
+<!--                android:id="@+id/logo_image"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:layout_marginBottom="8dp"-->
+<!--                android:src="@drawable/tree_logo"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/image_view_1"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/image_view_1" />-->
+
             <ImageButton
+                android:visibility="visible"
                 android:id="@+id/share_button"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@android:color/transparent"
-                android:padding="35dp"
+                android:paddingTop="55dp"
+                android:paddingStart="55dp"
+                android:paddingEnd="8dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/share"
+                android:src="@drawable/share_button_yellow_90px"
+
                 app:layout_constraintBottom_toBottomOf="@+id/image_view_1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -107,6 +121,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
 
             <ImageButton
                 android:id="@+id/back_button"

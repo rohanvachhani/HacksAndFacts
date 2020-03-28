@@ -8,13 +8,12 @@
 
     <ImageView
         android:id="@+id/img_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginStart="16dp"
-        android:scaleType="fitXY"
-        android:transitionName="logoTransition"
         android:adjustViewBounds="true"
-        android:src="@drawable/handf_without_blur"
+        android:scaleType="fitCenter"
+        android:src="@drawable/tree_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

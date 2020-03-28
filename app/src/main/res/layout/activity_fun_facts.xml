@@ -5,9 +5,8 @@
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#262626"
-    tools:context=".LifeHacksActivity">
-
+    android:background="#fff"
+    tools:context=".FunFactsActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/oops_card"
@@ -39,7 +38,7 @@
 <!--        android:layout_width="100dp"-->
 <!--        android:layout_height="100dp"-->
 <!--        android:layout_marginStart="4dp"-->
-<!--        android:src="@drawable/tree_logo"-->
+<!--        android:src="@drawable/handf_without_blur"-->
 <!--        android:transitionName="logoTransition"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent"></ImageView>-->

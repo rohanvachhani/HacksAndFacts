@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         logoImageView = findViewById(R.id.img_view);
-        //nimationFadeIn = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.fade_in);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
