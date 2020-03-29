@@ -22,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.castorflex.android.circularprogressbar.CircularProgressBar;
+
 public class LifeHacksActivity extends AppCompatActivity {
 
 
@@ -35,16 +37,22 @@ public class LifeHacksActivity extends AppCompatActivity {
 
     private long startnow, endnow;
 
+    CircularProgressBar circularProgressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        circularProgressBar = findViewById(R.id.progress_bar);
+        circularProgressBar.setVisibility(View.VISIBLE);
         //overridePendingTransition(0, 0);
         //splash screen shown first and then this code will be executed
 
         //firebase code
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+
 
         c1 = findViewById(R.id.oops_card);
         infiniteCycleViewPager = findViewById(R.id.hicvp);
@@ -53,10 +61,14 @@ public class LifeHacksActivity extends AppCompatActivity {
         databaseReference.keepSynced(true);
 
 
+
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                circularProgressBar.setVisibility(View.GONE);
                 if (dataSnapshot.exists()) {
+
                     startnow = android.os.SystemClock.uptimeMillis();
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -86,13 +98,18 @@ public class LifeHacksActivity extends AppCompatActivity {
                         infiniteCycleViewPager.setAdapter(myAdapter);
                     }
                 } else {
+                   // circularProgressBar.setVisibility(View.GONE);
                     Toast.makeText(LifeHacksActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
                     Log.i("mytag", "in else no data snap shot is there!!!!");
                 }
+
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                circularProgressBar.setVisibility(View.GONE);
                 Toast.makeText(LifeHacksActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
             }
         });
