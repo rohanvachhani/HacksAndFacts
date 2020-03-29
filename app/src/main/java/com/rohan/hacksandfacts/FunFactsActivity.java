@@ -75,7 +75,7 @@ public class FunFactsActivity extends AppCompatActivity {
                     for (String s : listOfString) {
                         Log.i("final_data", s);
                     }
-                    Toast.makeText(FunFactsActivity.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(FunFactsActivity.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
 
                     // listOfString.clear();
                     if (listOfString.size() == 0) {
@@ -97,7 +97,7 @@ public class FunFactsActivity extends AppCompatActivity {
                     }
                 } else {
 
-                    Toast.makeText(FunFactsActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(FunFactsActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
                     Log.i("mytag", "in else no data snap shot is there!!!!");
                 }
             }
@@ -105,7 +105,7 @@ public class FunFactsActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 circularProgressBar.setVisibility(View.GONE);
-                Toast.makeText(FunFactsActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(FunFactsActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -84,7 +84,7 @@ public class LifeHacksActivity extends AppCompatActivity {
                     for (String s : listOfString) {
                         Log.i("final_data", s);
                     }
-                    Toast.makeText(LifeHacksActivity.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(LifeHacksActivity.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
 
                     // listOfString.clear();
                     if (listOfString.size() == 0) {
@@ -103,7 +103,7 @@ public class LifeHacksActivity extends AppCompatActivity {
                     }
                 } else {
                     // circularProgressBar.setVisibility(View.GONE);
-                    Toast.makeText(LifeHacksActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LifeHacksActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
                     Log.i("mytag", "in else no data snap shot is there!!!!");
                 }
 
@@ -114,7 +114,7 @@ public class LifeHacksActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 circularProgressBar.setVisibility(View.GONE);
-                Toast.makeText(LifeHacksActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LifeHacksActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
             }
         });
     }

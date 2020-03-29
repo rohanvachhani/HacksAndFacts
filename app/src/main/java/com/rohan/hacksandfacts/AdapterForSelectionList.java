@@ -71,7 +71,7 @@ public class AdapterForSelectionList extends PagerAdapter {
                     case "fun facts":
                         i = new Intent(v.getContext(), FunFactsActivity.class);
                         break;
-                    case "user's choice":
+                    case "user choice":
                         i = new Intent(v.getContext(), ByUsers.class);
                         break;
                 }
