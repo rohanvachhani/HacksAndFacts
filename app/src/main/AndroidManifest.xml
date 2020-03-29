@@ -21,6 +21,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SelectionActivity"
+            android:theme="@style/splashTheme"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
@@ -28,7 +29,9 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
+
             android:name=".SplashActivity"
+            android:theme="@style/splashTheme"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
             <intent-filter>

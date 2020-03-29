@@ -20,7 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
@@ -53,14 +56,11 @@ public class LifeHacksActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
 
-
         c1 = findViewById(R.id.oops_card);
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         imageViewLogo = findViewById(R.id.img_view);
         DatabaseReference databaseReference = firebaseDatabase.getReference("life_hacks");
         databaseReference.keepSynced(true);
-
-
 
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -94,11 +94,15 @@ public class LifeHacksActivity extends AppCompatActivity {
                         c1.setVisibility(View.GONE);
                         infiniteCycleViewPager.setVisibility(View.VISIBLE);
 
+                        //shuffle the list of string
+                        if(listOfString.size()>2) {
+                            Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
+                        }
                         MyAdapter myAdapter = new MyAdapter(getApplicationContext(), listOfString);
                         infiniteCycleViewPager.setAdapter(myAdapter);
                     }
                 } else {
-                   // circularProgressBar.setVisibility(View.GONE);
+                    // circularProgressBar.setVisibility(View.GONE);
                     Toast.makeText(LifeHacksActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
                     Log.i("mytag", "in else no data snap shot is there!!!!");
                 }

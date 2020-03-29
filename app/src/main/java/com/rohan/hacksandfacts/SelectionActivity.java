@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager;
@@ -33,12 +34,12 @@ public class SelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityCompat.postponeEnterTransition(this);
         setContentView(R.layout.activity_selection);
-       // overridePendingTransition(0, 0);
+        // overridePendingTransition(0, 0);
 
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         logoImageView = findViewById(R.id.img_view);
-        listOfString = new ArrayList<>();
 
+        listOfString = new ArrayList<>();
 
         listOfString.add("Life Hacks");
         listOfString.add("User's Choice");
@@ -49,7 +50,6 @@ public class SelectionActivity extends AppCompatActivity {
 
         AdapterForSelectionList pagerAdapter = new AdapterForSelectionList(this, listOfString);
         infiniteCycleViewPager.setAdapter(pagerAdapter);
-
     }
 
     @Override

@@ -18,7 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
@@ -84,6 +86,11 @@ public class FunFactsActivity extends AppCompatActivity {
 
                         c1.setVisibility(View.GONE);
                         infiniteCycleViewPager.setVisibility(View.VISIBLE);
+
+                        //shuffle the list of string
+                        if(listOfString.size()>2){
+                        Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
+                        }
 
                         MyAdapter myAdapter = new MyAdapter(getApplicationContext(), listOfString);
                         infiniteCycleViewPager.setAdapter(myAdapter);
