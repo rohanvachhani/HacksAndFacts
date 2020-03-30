@@ -32,7 +32,7 @@ public class ByUsers extends AppCompatActivity {
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
     FirebaseDatabase firebaseDatabase;
-    ImageView imageViewLogo;
+    ImageView imageViewLogo, mainbackButton;
 
     private long startnow, endnow;
     CircularProgressBar circularProgressBar;
@@ -50,6 +50,15 @@ public class ByUsers extends AppCompatActivity {
         c1 = findViewById(R.id.oops_card);
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         imageViewLogo = findViewById(R.id.img_view);
+
+        mainbackButton = findViewById(R.id.main_black_button);
+        mainbackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         DatabaseReference databaseReference = firebaseDatabase.getReference("user_choice");
         databaseReference.keepSynced(true);
 
@@ -75,7 +84,7 @@ public class ByUsers extends AppCompatActivity {
                     for (String s : listOfString) {
                         Log.i("final_data", s);
                     }
-                   // Toast.makeText(ByUsers.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(ByUsers.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
 
                     // listOfString.clear();
                     if (listOfString.size() == 0) {
@@ -86,7 +95,7 @@ public class ByUsers extends AppCompatActivity {
                         infiniteCycleViewPager.setVisibility(View.VISIBLE);
 
                         //shuffle the list of string
-                        if(listOfString.size()>2) {
+                        if (listOfString.size() > 2) {
                             Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
                         }
 
@@ -106,5 +115,11 @@ public class ByUsers extends AppCompatActivity {
                 //Toast.makeText(ByUsers.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

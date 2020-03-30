@@ -3,6 +3,7 @@ package com.rohan.hacksandfacts;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -41,7 +42,9 @@ public class MyAdapter extends PagerAdapter {
 
         final View main_view = layoutInflater.from(context).inflate(R.layout.card_layout, container, false);
         TextView tv = main_view.findViewById(R.id.text_view_1);
+        Typeface product_sans = Typeface.createFromAsset(context.getAssets(), "product_sans_black.ttf");
         tv.setText(listOfString.get(position));
+        tv.setTypeface(product_sans);
         // ImageView imageView1 = view.findViewById(R.id.image_view_1);
         // imageView1.setImageResource(listOfImages.get(position));
 

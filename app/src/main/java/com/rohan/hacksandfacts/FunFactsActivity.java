@@ -32,7 +32,7 @@ public class FunFactsActivity extends AppCompatActivity {
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
     FirebaseDatabase firebaseDatabase;
-    ImageView imageViewLogo;
+    ImageView imageViewLogo, mainbackButton;
 
     private long startnow, endnow;
     CircularProgressBar circularProgressBar;
@@ -50,6 +50,15 @@ public class FunFactsActivity extends AppCompatActivity {
         c1 = findViewById(R.id.oops_card);
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         imageViewLogo = findViewById(R.id.img_view);
+
+
+        mainbackButton = findViewById(R.id.main_black_button);
+        mainbackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         DatabaseReference databaseReference = firebaseDatabase.getReference("fun_facts");
         databaseReference.keepSynced(true);
 
@@ -88,8 +97,8 @@ public class FunFactsActivity extends AppCompatActivity {
                         infiniteCycleViewPager.setVisibility(View.VISIBLE);
 
                         //shuffle the list of string
-                        if(listOfString.size()>2){
-                        Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
+                        if (listOfString.size() > 2) {
+                            Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
                         }
 
                         MyAdapter myAdapter = new MyAdapter(getApplicationContext(), listOfString);
@@ -97,7 +106,7 @@ public class FunFactsActivity extends AppCompatActivity {
                     }
                 } else {
 
-                   // Toast.makeText(FunFactsActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(FunFactsActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
                     Log.i("mytag", "in else no data snap shot is there!!!!");
                 }
             }
@@ -105,8 +114,14 @@ public class FunFactsActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 circularProgressBar.setVisibility(View.GONE);
-               // Toast.makeText(FunFactsActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(FunFactsActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -36,7 +38,7 @@ public class LifeHacksActivity extends AppCompatActivity {
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
     FirebaseDatabase firebaseDatabase;
-    ImageView imageViewLogo;
+    ImageView imageViewLogo, mainbackButton;
 
     private long startnow, endnow;
 
@@ -59,6 +61,15 @@ public class LifeHacksActivity extends AppCompatActivity {
         c1 = findViewById(R.id.oops_card);
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         imageViewLogo = findViewById(R.id.img_view);
+        mainbackButton = findViewById(R.id.main_black_button);
+        mainbackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
         DatabaseReference databaseReference = firebaseDatabase.getReference("life_hacks");
         databaseReference.keepSynced(true);
 
@@ -66,7 +77,7 @@ public class LifeHacksActivity extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                circularProgressBar.setVisibility(View.GONE);
+
                 if (dataSnapshot.exists()) {
 
                     startnow = android.os.SystemClock.uptimeMillis();
@@ -85,7 +96,7 @@ public class LifeHacksActivity extends AppCompatActivity {
                         Log.i("final_data", s);
                     }
                    // Toast.makeText(LifeHacksActivity.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
-
+                    circularProgressBar.setVisibility(View.GONE);
                     // listOfString.clear();
                     if (listOfString.size() == 0) {
                         c1.setVisibility(View.VISIBLE);
@@ -102,7 +113,7 @@ public class LifeHacksActivity extends AppCompatActivity {
                         infiniteCycleViewPager.setAdapter(myAdapter);
                     }
                 } else {
-                    // circularProgressBar.setVisibility(View.GONE);
+                    circularProgressBar.setVisibility(View.GONE);
                     //Toast.makeText(LifeHacksActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
                     Log.i("mytag", "in else no data snap shot is there!!!!");
                 }
@@ -117,5 +128,17 @@ public class LifeHacksActivity extends AppCompatActivity {
                 //Toast.makeText(LifeHacksActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public int pxToDp(int px, Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int dp = Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return dp;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

@@ -8,6 +8,24 @@
     android:background="#fff"
     tools:context=".LifeHacksActivity">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/boya_regular"
+        android:gravity="center"
+
+        android:letterSpacing="0.5"
+        android:text="Life Hacks"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/oops_card"
@@ -60,13 +78,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/hicvp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/hicvp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
         android:id="@+id/hicvp"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:scrollbarFadeDuration="400"
         app:icvp_center_page_scale_offset="30dp"
         app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
@@ -75,10 +92,21 @@
         app:icvp_min_page_scale="0.5"
         app:icvp_min_page_scale_offset="5dp"
         app:icvp_scroll_duration="500"
+        app:layout_constraintBottom_toTopOf="@+id/main_black_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/main_black_button"
+        android:layout_width="250px"
+        android:layout_height="250px"
+        android:layout_marginBottom="24dp"
+        android:padding="24dp"
+        android:src="@drawable/back_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_view" />
+        app:layout_constraintStart_toStartOf="@+id/hicvp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

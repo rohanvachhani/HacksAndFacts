@@ -6,7 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context=".ByUsers">
+    tools:context=".LifeHacksActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/boya_regular"
+        android:gravity="center"
+
+        android:letterSpacing="0.5"
+        android:text="By users"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/oops_card"
@@ -30,19 +49,20 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/oops_image" />
+
+
     </androidx.cardview.widget.CardView>
 
 
-<!--    <ImageView-->
-<!--        android:id="@+id/img_view"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:layout_marginStart="4dp"-->
-<!--        android:src="@drawable/handf_without_blur"-->
-<!--        android:transitionName="logoTransition"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"></ImageView>-->
-
+    <!--    <ImageView-->
+    <!--        android:id="@+id/img_view"-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_marginStart="4dp"-->
+    <!--        android:src="@drawable/tree_logo"-->
+    <!--        android:transitionName="logoTransition"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"></ImageView>-->
     <fr.castorflex.android.circularprogressbar.CircularProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="40dp"
@@ -58,13 +78,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/hicvp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/hicvp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
         android:id="@+id/hicvp"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:scrollbarFadeDuration="400"
         app:icvp_center_page_scale_offset="30dp"
         app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
@@ -73,10 +92,21 @@
         app:icvp_min_page_scale="0.5"
         app:icvp_min_page_scale_offset="5dp"
         app:icvp_scroll_duration="500"
+        app:layout_constraintBottom_toTopOf="@+id/main_black_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/main_black_button"
+        android:layout_width="250px"
+        android:layout_height="250px"
+        android:layout_marginBottom="24dp"
+        android:padding="24dp"
+        android:src="@drawable/back_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_view" />
+        app:layout_constraintStart_toStartOf="@+id/hicvp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

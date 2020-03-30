@@ -38,21 +38,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_view" />
 
-    <com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager
+    <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
         android:id="@+id/hicvp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:scrollbarFadeDuration="400"
         app:icvp_center_page_scale_offset="30dp"
         app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
         app:icvp_max_page_scale="0.8"
         app:icvp_medium_scaled="true"
-        app:icvp_min_page_scale="0.55"
+        app:icvp_min_page_scale="0.47"
         app:icvp_min_page_scale_offset="5dp"
         app:icvp_scroll_duration="500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 

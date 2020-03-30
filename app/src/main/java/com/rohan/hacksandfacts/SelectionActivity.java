@@ -26,7 +26,9 @@ public class SelectionActivity extends AppCompatActivity {
     ImageView logoImageView;
     List<String> listOfString;
 
-    VerticalInfiniteCycleViewPager infiniteCycleViewPager;
+   // VerticalInfiniteCycleViewPager infiniteCycleViewPager;
+
+    HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
 
     @Override

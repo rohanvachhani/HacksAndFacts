@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,6 @@ public class AdapterForSelectionList extends PagerAdapter {
     private final LayoutInflater layoutInflater;
     static Animation animationFadeIn;
     static Intent i = null;
-    ImageView iV;
 
     public AdapterForSelectionList(Activity applicationContext, List<String> listOfString) {
         this.listOfString = listOfString;
@@ -50,10 +50,11 @@ public class AdapterForSelectionList extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull final ViewGroup container, int position) {
-        final View main_view = layoutInflater.from(context).inflate(R.layout.card_layout_selection_activity, container, false);
+        final View main_view = layoutInflater.from(context).inflate(R.layout.card_view_small, container, false);
         final TextView tv = main_view.findViewById(R.id.text_view_1);
+        Typeface product_sans = Typeface.createFromAsset(context.getAssets(), "product_sans_black.ttf");
         tv.setText(listOfString.get(position));
-
+        tv.setTypeface(product_sans);
 
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,10 +64,6 @@ public class AdapterForSelectionList extends PagerAdapter {
                 switch (tv.getText().toString().trim().toLowerCase()) {
                     case "life hacks":
                         i = new Intent(v.getContext(), LifeHacksActivity.class);
-
-                        //ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this,,"logoTransition");
-                        //Intent in = new Intent(v.getContext(),LifeHacksActivity.class);
-                        //context.startActivity(in,activityOptionsCompat.toBundle());
                         break;
                     case "fun facts":
                         i = new Intent(v.getContext(), FunFactsActivity.class);
