@@ -1,16 +1,13 @@
 package com.rohan.hacksandfacts;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Pair;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -25,9 +22,10 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         logoImageView = findViewById(R.id.img_view);
-        animationFadeIn = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.fade_in);
+        animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
         logoImageView.startAnimation(animationFadeIn);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override

@@ -1,14 +1,16 @@
 package com.rohan.hacksandfacts;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +39,9 @@ public class FunFactsActivity extends AppCompatActivity {
     private long startnow, endnow;
     CircularProgressBar circularProgressBar;
 
+    static MyAdapter myAdapter;
+    TextView textViewTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +64,13 @@ public class FunFactsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        textViewTitle = findViewById(R.id.title);
+
+        Animation a = AnimationUtils.loadAnimation(this, R.anim.fade_in_long);
+        textViewTitle.startAnimation(a);
+        mainbackButton.startAnimation(a);
+
         DatabaseReference databaseReference = firebaseDatabase.getReference("fun_facts");
         databaseReference.keepSynced(true);
 
@@ -73,17 +85,13 @@ public class FunFactsActivity extends AppCompatActivity {
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         listOfString.add(ds.child("A").getValue().toString().trim());
-                        Log.i("data", ds.child("A").getValue().toString());
+                        //Log.i("data", ds.child("A").getValue().toString());
                     }
                     endnow = android.os.SystemClock.uptimeMillis();
-                    Log.d("MYTAG", "Execution time: " + (endnow - startnow) + " ms");
+                   // Log.d("MYTAG", "Execution time: " + (endnow - startnow) + " ms");
 
                     // firebaseCallBack.onCallBack(listOfStrings);
 
-                    Log.i("final_data", "initial");
-                    for (String s : listOfString) {
-                        Log.i("final_data", s);
-                    }
                     //Toast.makeText(FunFactsActivity.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
 
                     // listOfString.clear();
@@ -101,8 +109,9 @@ public class FunFactsActivity extends AppCompatActivity {
                             Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
                         }
 
-                        MyAdapter myAdapter = new MyAdapter(getApplicationContext(), listOfString);
+                        MyAdapter myAdapter = new MyAdapter(FunFactsActivity.this, listOfString);
                         infiniteCycleViewPager.setAdapter(myAdapter);
+                        //infiniteCycleViewPager.setOffscreenPageLimit(3);
                     }
                 } else {
 
@@ -123,5 +132,13 @@ public class FunFactsActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myAdapter = null;
+        Runtime.getRuntime().gc();
     }
 }

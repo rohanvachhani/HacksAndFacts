@@ -1,14 +1,16 @@
 package com.rohan.hacksandfacts;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +37,10 @@ public class ByUsers extends AppCompatActivity {
     ImageView imageViewLogo, mainbackButton;
 
     private long startnow, endnow;
+    static MyAdapter myAdapter;
     CircularProgressBar circularProgressBar;
+
+    TextView textViewTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +64,14 @@ public class ByUsers extends AppCompatActivity {
             }
         });
 
+        textViewTitle = findViewById(R.id.title);
+
+        Animation a = AnimationUtils.loadAnimation(this, R.anim.fade_in_long);
+        textViewTitle.startAnimation(a);
+        mainbackButton.startAnimation(a);
+
         DatabaseReference databaseReference = firebaseDatabase.getReference("user_choice");
         databaseReference.keepSynced(true);
-
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -73,20 +83,10 @@ public class ByUsers extends AppCompatActivity {
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         listOfString.add(ds.child("A").getValue().toString().trim());
-                        Log.i("data", ds.child("A").getValue().toString());
                     }
+
                     endnow = android.os.SystemClock.uptimeMillis();
-                    Log.d("MYTAG", "Execution time: " + (endnow - startnow) + " ms");
 
-                    // firebaseCallBack.onCallBack(listOfStrings);
-
-                    Log.i("final_data", "initial");
-                    for (String s : listOfString) {
-                        Log.i("final_data", s);
-                    }
-                    // Toast.makeText(ByUsers.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
-
-                    // listOfString.clear();
                     if (listOfString.size() == 0) {
                         c1.setVisibility(View.VISIBLE);
                         infiniteCycleViewPager.setVisibility(View.GONE);
@@ -99,12 +99,11 @@ public class ByUsers extends AppCompatActivity {
                             Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
                         }
 
-                        MyAdapter myAdapter = new MyAdapter(getApplicationContext(), listOfString);
+                         myAdapter = new MyAdapter(ByUsers.this, listOfString);
                         infiniteCycleViewPager.setAdapter(myAdapter);
+                        //infiniteCycleViewPager.setOffscreenPageLimit(3);
                     }
                 } else {
-
-                    //Toast.makeText(ByUsers.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
                     Log.i("mytag", "in else no data snap shot is there!!!!");
                 }
             }
@@ -112,7 +111,6 @@ public class ByUsers extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 circularProgressBar.setVisibility(View.GONE);
-                //Toast.makeText(ByUsers.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -121,5 +119,13 @@ public class ByUsers extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myAdapter = null;
+        Runtime.getRuntime().gc();
+
     }
 }

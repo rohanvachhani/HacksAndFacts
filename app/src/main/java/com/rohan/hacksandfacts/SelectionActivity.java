@@ -1,21 +1,15 @@
 package com.rohan.hacksandfacts;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.viewpager.widget.ViewPager;
-
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Pair;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
-import com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +19,7 @@ public class SelectionActivity extends AppCompatActivity {
 
     ImageView logoImageView;
     List<String> listOfString;
-
-   // VerticalInfiniteCycleViewPager infiniteCycleViewPager;
+    TextView titleTextView;
 
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
@@ -36,10 +29,14 @@ public class SelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityCompat.postponeEnterTransition(this);
         setContentView(R.layout.activity_selection);
-        // overridePendingTransition(0, 0);
+
 
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         logoImageView = findViewById(R.id.img_view);
+
+        titleTextView = findViewById(R.id.title_text);
+        Animation a = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        titleTextView.startAnimation(a);
 
         listOfString = new ArrayList<>();
 
@@ -52,6 +49,7 @@ public class SelectionActivity extends AppCompatActivity {
 
         AdapterForSelectionList pagerAdapter = new AdapterForSelectionList(this, listOfString);
         infiniteCycleViewPager.setAdapter(pagerAdapter);
+        //infiniteCycleViewPager.setOffscreenPageLimit(3);
     }
 
     @Override
@@ -59,4 +57,6 @@ public class SelectionActivity extends AppCompatActivity {
         super.onBackPressed();
         finishAffinity();
     }
+
+
 }

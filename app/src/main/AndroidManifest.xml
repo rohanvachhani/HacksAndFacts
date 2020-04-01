@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.rohan.hacksandfacts">
+
+
 
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -21,9 +25,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SelectionActivity"
-            android:theme="@style/splashTheme"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/splashTheme" />
         <activity
             android:name=".LifeHacksActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -31,9 +35,9 @@
         <activity
 
             android:name=".SplashActivity"
-            android:theme="@style/splashTheme"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/splashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,23 +1,15 @@
 package com.rohan.hacksandfacts;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.List;
@@ -26,15 +18,14 @@ public class AdapterForSelectionList extends PagerAdapter {
     private final List<String> listOfString;
     private final Context context;
     private final LayoutInflater layoutInflater;
-    static Animation animationFadeIn;
+
+
     static Intent i = null;
 
-    public AdapterForSelectionList(Activity applicationContext, List<String> listOfString) {
+    public AdapterForSelectionList(Context applicationContext, List<String> listOfString) {
         this.listOfString = listOfString;
         this.context = applicationContext;
         this.layoutInflater = LayoutInflater.from(context);
-        animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in);
-        // iV = (Activity)context.findViewById(R.id.img_view);
     }
 
     @Override
@@ -59,7 +50,7 @@ public class AdapterForSelectionList extends PagerAdapter {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "card text: " + tv.getText(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "card text: " + tv.getText(), Toast.LENGTH_SHORT).show();
 
                 switch (tv.getText().toString().trim().toLowerCase()) {
                     case "life hacks":

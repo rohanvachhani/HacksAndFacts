@@ -1,18 +1,17 @@
 package com.rohan.hacksandfacts;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Context;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -43,6 +41,8 @@ public class LifeHacksActivity extends AppCompatActivity {
     private long startnow, endnow;
 
     CircularProgressBar circularProgressBar;
+    TextView textViewTitle;
+    static MyAdapter myAdapter;
 
 
     @Override
@@ -69,6 +69,11 @@ public class LifeHacksActivity extends AppCompatActivity {
             }
         });
 
+        textViewTitle = findViewById(R.id.title);
+
+        Animation a = AnimationUtils.loadAnimation(this, R.anim.fade_in_long);
+        textViewTitle.startAnimation(a);
+        mainbackButton.startAnimation(a);
 
         DatabaseReference databaseReference = firebaseDatabase.getReference("life_hacks");
         databaseReference.keepSynced(true);
@@ -84,18 +89,11 @@ public class LifeHacksActivity extends AppCompatActivity {
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         listOfString.add(ds.child("A").getValue().toString().trim());
-                        Log.i("data", ds.child("A").getValue().toString());
+                        //Log.i("data", ds.child("A").getValue().toString());
                     }
                     endnow = android.os.SystemClock.uptimeMillis();
                     Log.d("MYTAG", "Execution time: " + (endnow - startnow) + " ms");
 
-                    // firebaseCallBack.onCallBack(listOfStrings);
-
-                    Log.i("final_data", "initial");
-                    for (String s : listOfString) {
-                        Log.i("final_data", s);
-                    }
-                   // Toast.makeText(LifeHacksActivity.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
                     circularProgressBar.setVisibility(View.GONE);
                     // listOfString.clear();
                     if (listOfString.size() == 0) {
@@ -106,19 +104,20 @@ public class LifeHacksActivity extends AppCompatActivity {
                         infiniteCycleViewPager.setVisibility(View.VISIBLE);
 
                         //shuffle the list of string
-                        if(listOfString.size()>2) {
+                        if (listOfString.size() > 2) {
                             Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
                         }
-                        MyAdapter myAdapter = new MyAdapter(getApplicationContext(), listOfString);
+
+                        myAdapter = new MyAdapter(LifeHacksActivity.this, listOfString);
                         infiniteCycleViewPager.setAdapter(myAdapter);
+                        //infiniteCycleViewPager.setOffscreenPageLimit(3);
+
                     }
                 } else {
                     circularProgressBar.setVisibility(View.GONE);
                     //Toast.makeText(LifeHacksActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
                     Log.i("mytag", "in else no data snap shot is there!!!!");
                 }
-
-
             }
 
             @Override
@@ -130,15 +129,16 @@ public class LifeHacksActivity extends AppCompatActivity {
         });
     }
 
-    public int pxToDp(int px, Context context) {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int dp = Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        return dp;
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myAdapter = null;
+        Runtime.getRuntime().gc();
     }
 }

@@ -3,12 +3,14 @@ package com.rohan.hacksandfacts;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,7 +28,9 @@ public class MyAdapter extends PagerAdapter {
     ConstraintLayout cl1, cl2;
     float pixelDensity;
 
+    ImageButton whatsapp_button;
     ImageButton shareButton, backButton;
+    ImageView card_image, back_image;
 
 
     public MyAdapter(Context context, List<String> listOfString) {
@@ -41,43 +45,26 @@ public class MyAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
 
         final View main_view = layoutInflater.from(context).inflate(R.layout.card_layout, container, false);
-        TextView tv = main_view.findViewById(R.id.text_view_1);
+        final TextView tv = main_view.findViewById(R.id.text_view_1);
+        card_image = main_view.findViewById(R.id.image_view_1);
+        back_image = main_view.findViewById(R.id.image_view_2);
+
         Typeface product_sans = Typeface.createFromAsset(context.getAssets(), "product_sans_black.ttf");
         tv.setText(listOfString.get(position));
         tv.setTypeface(product_sans);
-        // ImageView imageView1 = view.findViewById(R.id.image_view_1);
-        // imageView1.setImageResource(listOfImages.get(position));
+        whatsapp_button = main_view.findViewById(R.id.whatsapp_button);
 
-        // c1 = (ConstraintLayout) view.findViewById(R.id.first_side);
         shareButton = main_view.findViewById(R.id.share_button);
-        //c2 = (ConstraintLayout) view.findViewById(R.id.second_side);
+
         backButton = main_view.findViewById(R.id.back_button);
-
-
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TextView tv1 = v.findViewById(R.id.text_view_1);
-//                c1 = (ConstraintLayout) v.findViewById(R.id.first_side);
-//                shareButton = v.findViewById(R.id.share_button);
-//                c2 = (ConstraintLayout) v.findViewById(R.id.second_side);
-//                backButton = v.findViewById(R.id.back_button);
-//                c1.setVisibility(View.GONE);
-//                c2.setVisibility(View.VISIBLE);
-//                Toast.makeText(context, "Card " + tv1.getText().toString() + " is clicked", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
 
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Log.i("button", "share button clicked");
 
-                cl1 = (ConstraintLayout) main_view.findViewById(R.id.first_side);
-                //shareButton = v.findViewById(R.id.share_button);
-                cl2 = (ConstraintLayout) main_view.findViewById(R.id.second_side);
-                //backButton = v.findViewById(R.id.back_button);
+                cl1 = main_view.findViewById(R.id.first_side);
+                cl2 = main_view.findViewById(R.id.second_side);
 
                 anim_effect_share_button(cl1, cl2);
 
@@ -87,13 +74,25 @@ public class MyAdapter extends PagerAdapter {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // anim_effect();
-                cl1 = (ConstraintLayout) main_view.findViewById(R.id.first_side);
-                //shareButton = v.findViewById(R.id.share_button);
-                cl2 = (ConstraintLayout) main_view.findViewById(R.id.second_side);
-                //backButton = v.findViewById(R.id.back_button);
+                cl1 = main_view.findViewById(R.id.first_side);
+
+                cl2 = main_view.findViewById(R.id.second_side);
+
                 anim_effect_back_button(cl1, cl2);
                 cl1.setVisibility(View.VISIBLE);
+            }
+        });
+
+        whatsapp_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String shareBody = tv.getText().toString().trim();
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hacks and Facts");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                context.startActivity(Intent.createChooser(sharingIntent, "abc"));
+
             }
         });
 
@@ -205,8 +204,6 @@ public class MyAdapter extends PagerAdapter {
 
         if (!isAnimationActive) {
             anim.start();
-
-
         }
     }
 
