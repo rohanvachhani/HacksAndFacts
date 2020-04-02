@@ -52,7 +52,7 @@ public class ByUsers extends AppCompatActivity {
         //firebase code
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        c1 = findViewById(R.id.oops_card);
+
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         imageViewLogo = findViewById(R.id.img_view);
 
@@ -87,12 +87,6 @@ public class ByUsers extends AppCompatActivity {
 
                     endnow = android.os.SystemClock.uptimeMillis();
 
-                    if (listOfString.size() == 0) {
-                        c1.setVisibility(View.VISIBLE);
-                        infiniteCycleViewPager.setVisibility(View.GONE);
-                    } else {
-                        c1.setVisibility(View.GONE);
-                        infiniteCycleViewPager.setVisibility(View.VISIBLE);
 
                         //shuffle the list of string
                         if (listOfString.size() > 2) {
@@ -102,7 +96,7 @@ public class ByUsers extends AppCompatActivity {
                          myAdapter = new MyAdapter(ByUsers.this, listOfString);
                         infiniteCycleViewPager.setAdapter(myAdapter);
                         //infiniteCycleViewPager.setOffscreenPageLimit(3);
-                    }
+
                 } else {
                     Log.i("mytag", "in else no data snap shot is there!!!!");
                 }

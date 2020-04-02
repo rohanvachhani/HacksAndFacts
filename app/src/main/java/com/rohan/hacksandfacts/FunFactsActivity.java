@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +29,6 @@ public class FunFactsActivity extends AppCompatActivity {
 
     List<String> listOfString = new ArrayList<>();
 
-    CardView c1;
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
     FirebaseDatabase firebaseDatabase;
@@ -52,7 +50,6 @@ public class FunFactsActivity extends AppCompatActivity {
         //firebase code
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        c1 = findViewById(R.id.oops_card);
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         imageViewLogo = findViewById(R.id.img_view);
 
@@ -88,31 +85,15 @@ public class FunFactsActivity extends AppCompatActivity {
                         //Log.i("data", ds.child("A").getValue().toString());
                     }
                     endnow = android.os.SystemClock.uptimeMillis();
-                   // Log.d("MYTAG", "Execution time: " + (endnow - startnow) + " ms");
 
-                    // firebaseCallBack.onCallBack(listOfStrings);
-
-                    //Toast.makeText(FunFactsActivity.this, "size of the list: " + listOfString.size(), Toast.LENGTH_SHORT).show();
-
-                    // listOfString.clear();
-                    if (listOfString.size() == 0) {
-
-                        c1.setVisibility(View.VISIBLE);
-                        infiniteCycleViewPager.setVisibility(View.GONE);
-                    } else {
-
-                        c1.setVisibility(View.GONE);
-                        infiniteCycleViewPager.setVisibility(View.VISIBLE);
-
-                        //shuffle the list of string
-                        if (listOfString.size() > 2) {
-                            Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
-                        }
-
-                        MyAdapter myAdapter = new MyAdapter(FunFactsActivity.this, listOfString);
-                        infiniteCycleViewPager.setAdapter(myAdapter);
-                        //infiniteCycleViewPager.setOffscreenPageLimit(3);
+                    //shuffle the list of string
+                    if (listOfString.size() > 2) {
+                        Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
                     }
+                    MyAdapter myAdapter = new MyAdapter(FunFactsActivity.this, listOfString);
+                    infiniteCycleViewPager.setAdapter(myAdapter);
+                    //infiniteCycleViewPager.setOffscreenPageLimit(3);
+
                 } else {
 
                     // Toast.makeText(FunFactsActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,5 @@
 package com.rohan.hacksandfacts;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +30,6 @@ public class LifeHacksActivity extends AppCompatActivity {
 
     List<String> listOfString = new ArrayList<>();
 
-    CardView c1;
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
     FirebaseDatabase firebaseDatabase;
@@ -43,6 +40,7 @@ public class LifeHacksActivity extends AppCompatActivity {
     CircularProgressBar circularProgressBar;
     TextView textViewTitle;
     static MyAdapter myAdapter;
+    // static MediaPlayer mp;
 
 
     @Override
@@ -58,7 +56,6 @@ public class LifeHacksActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
 
-        c1 = findViewById(R.id.oops_card);
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         imageViewLogo = findViewById(R.id.img_view);
         mainbackButton = findViewById(R.id.main_black_button);
@@ -75,6 +72,8 @@ public class LifeHacksActivity extends AppCompatActivity {
         textViewTitle.startAnimation(a);
         mainbackButton.startAnimation(a);
 
+        //mp = MediaPlayer.create(LifeHacksActivity.this, R.raw.book_flip);
+
         DatabaseReference databaseReference = firebaseDatabase.getReference("life_hacks");
         databaseReference.keepSynced(true);
 
@@ -82,9 +81,9 @@ public class LifeHacksActivity extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                circularProgressBar.setVisibility(View.GONE);
 
                 if (dataSnapshot.exists()) {
-
                     startnow = android.os.SystemClock.uptimeMillis();
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -94,27 +93,19 @@ public class LifeHacksActivity extends AppCompatActivity {
                     endnow = android.os.SystemClock.uptimeMillis();
                     Log.d("MYTAG", "Execution time: " + (endnow - startnow) + " ms");
 
-                    circularProgressBar.setVisibility(View.GONE);
-                    // listOfString.clear();
-                    if (listOfString.size() == 0) {
-                        c1.setVisibility(View.VISIBLE);
-                        infiniteCycleViewPager.setVisibility(View.GONE);
-                    } else {
-                        c1.setVisibility(View.GONE);
-                        infiniteCycleViewPager.setVisibility(View.VISIBLE);
 
-                        //shuffle the list of string
-                        if (listOfString.size() > 2) {
-                            Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
-                        }
-
-                        myAdapter = new MyAdapter(LifeHacksActivity.this, listOfString);
-                        infiniteCycleViewPager.setAdapter(myAdapter);
-                        //infiniteCycleViewPager.setOffscreenPageLimit(3);
-
+                    //shuffle the list of string
+                    if (listOfString.size() > 2) {
+                        Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
                     }
+
+                    myAdapter = new MyAdapter(LifeHacksActivity.this, listOfString);
+                    infiniteCycleViewPager.setAdapter(myAdapter);
+
+                    //infiniteCycleViewPager.setOffscreenPageLimit(3);
+
+
                 } else {
-                    circularProgressBar.setVisibility(View.GONE);
                     //Toast.makeText(LifeHacksActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
                     Log.i("mytag", "in else no data snap shot is there!!!!");
                 }

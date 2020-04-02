@@ -5,10 +5,12 @@ import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,9 +30,12 @@ public class MyAdapter extends PagerAdapter {
     ConstraintLayout cl1, cl2;
     float pixelDensity;
 
-    ImageButton whatsapp_button;
+    ImageButton shareMagic;
     ImageButton shareButton, backButton;
     ImageView card_image, back_image;
+
+    static MediaPlayer mp;
+    FrameLayout share_button_back;
 
 
     public MyAdapter(Context context, List<String> listOfString) {
@@ -38,6 +43,7 @@ public class MyAdapter extends PagerAdapter {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         pixelDensity = context.getResources().getDisplayMetrics().density;
+        mp = MediaPlayer.create(context, R.raw.bubble_pop);
     }
 
     @NonNull
@@ -47,12 +53,13 @@ public class MyAdapter extends PagerAdapter {
         final View main_view = layoutInflater.from(context).inflate(R.layout.card_layout, container, false);
         final TextView tv = main_view.findViewById(R.id.text_view_1);
         card_image = main_view.findViewById(R.id.image_view_1);
-        back_image = main_view.findViewById(R.id.image_view_2);
+        // back_image = main_view.findViewById(R.id.image_view_2);
 
         Typeface product_sans = Typeface.createFromAsset(context.getAssets(), "product_sans_black.ttf");
         tv.setText(listOfString.get(position));
         tv.setTypeface(product_sans);
-        whatsapp_button = main_view.findViewById(R.id.whatsapp_button);
+        share_button_back = main_view.findViewById(R.id.whatsapp_button);
+        // shareAnimation = main_view.findViewById(R.id.share_animation);
 
         shareButton = main_view.findViewById(R.id.share_button);
 
@@ -61,6 +68,12 @@ public class MyAdapter extends PagerAdapter {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                if (!mp.isPlaying()) {
+                    mp.start();
+
+                }
                 // Log.i("button", "share button clicked");
 
                 cl1 = main_view.findViewById(R.id.first_side);
@@ -74,6 +87,11 @@ public class MyAdapter extends PagerAdapter {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!mp.isPlaying()) {
+                    mp.start();
+
+                }
+
                 cl1 = main_view.findViewById(R.id.first_side);
 
                 cl2 = main_view.findViewById(R.id.second_side);
@@ -83,7 +101,7 @@ public class MyAdapter extends PagerAdapter {
             }
         });
 
-        whatsapp_button.setOnClickListener(new View.OnClickListener() {
+        share_button_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String shareBody = tv.getText().toString().trim();
