@@ -61,6 +61,12 @@ public class AdapterForSelectionList extends PagerAdapter {
                     case "user choice":
                         i = new Intent(v.getContext(), ByUsers.class);
                         break;
+                    case "submit your hacks or facts":
+                        i = new Intent(v.getContext(), SubmitSuggestion.class);
+                        break;
+                    case "about us":
+                        i = new Intent(v.getContext(), AboutUs.class);
+                        break;
                 }
                 v.getContext().startActivity(i);
             }
@@ -68,7 +74,6 @@ public class AdapterForSelectionList extends PagerAdapter {
 
         container.addView(main_view);
         return main_view;
-
     }
 
     @Override

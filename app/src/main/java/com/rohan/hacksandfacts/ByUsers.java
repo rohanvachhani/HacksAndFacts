@@ -68,7 +68,14 @@ public class ByUsers extends AppCompatActivity {
 
         Animation a = AnimationUtils.loadAnimation(this, R.anim.fade_in_long);
         textViewTitle.startAnimation(a);
-        mainbackButton.startAnimation(a);
+
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+
+        // Use bounce interpolator with amplitude 0.7 and frequency 30
+        AnimationBounceInterpolator interpolator = new AnimationBounceInterpolator(0.7, 30);
+        myAnim.setInterpolator(interpolator);
+        mainbackButton.startAnimation(myAnim);
+
 
         DatabaseReference databaseReference = firebaseDatabase.getReference("user_choice");
         databaseReference.keepSynced(true);

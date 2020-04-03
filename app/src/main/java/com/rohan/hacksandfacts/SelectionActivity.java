@@ -41,11 +41,12 @@ public class SelectionActivity extends AppCompatActivity {
         listOfString = new ArrayList<>();
 
         listOfString.add("Life Hacks");
-        listOfString.add("User Choice");
+
         listOfString.add("Fun Facts");
         listOfString.add("User Choice");
-        listOfString.add("Fun Facts");
-        listOfString.add("User Choice");
+
+        listOfString.add("Submit Your Hacks or Facts");
+        listOfString.add("About Us");
 
         AdapterForSelectionList pagerAdapter = new AdapterForSelectionList(this, listOfString);
         infiniteCycleViewPager.setAdapter(pagerAdapter);
