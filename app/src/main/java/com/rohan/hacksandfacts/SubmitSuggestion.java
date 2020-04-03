@@ -29,11 +29,16 @@ public class SubmitSuggestion extends AppCompatActivity implements View.OnClickL
         gmailIcon.setOnClickListener(this);
         mainBackButton.setOnClickListener(this);
 
-        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
-        // Use bounce interpolator with amplitude 0.2 and frequency 20
-        AnimationBounceInterpolator interpolator = new AnimationBounceInterpolator(0.7, 30);
-        myAnim.setInterpolator(interpolator);
-        mainBackButton.startAnimation(myAnim);
+//        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+//        // Use bounce interpolator with amplitude 0.2 and frequency 20
+//        AnimationBounceInterpolator interpolator = new AnimationBounceInterpolator(0.7, 30);
+//        myAnim.setInterpolator(interpolator);
+//        mainBackButton.startAnimation(myAnim);
+
+        Animation b = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        b.setStartOffset(1000);
+
+        mainBackButton.startAnimation(b);
 
     }
 

@@ -68,7 +68,7 @@
         <ImageView
             android:id="@+id/instagram_icon"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:paddingEnd="16dp"
             android:src="@drawable/instagram"
@@ -78,7 +78,7 @@
         <ImageView
             android:id="@+id/gmail_icon"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:src="@drawable/gmail"

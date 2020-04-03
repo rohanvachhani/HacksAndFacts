@@ -35,7 +35,11 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
         t1.startAnimation(a);
         t2.startAnimation(a);
 
-        mainBackButton.startAnimation(myAnim);
+        Animation b = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        b.setStartOffset(1000);
+
+        mainBackButton.startAnimation(b);
+//        mainBackButton.startAnimation(myAnim);
     }
 
 
