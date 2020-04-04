@@ -43,7 +43,6 @@ public class MyAdapter extends PagerAdapter {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         pixelDensity = context.getResources().getDisplayMetrics().density;
-        mp = MediaPlayer.create(context, R.raw.bubble_pop);
     }
 
     @NonNull

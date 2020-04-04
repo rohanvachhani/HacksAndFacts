@@ -71,7 +71,7 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:paddingEnd="16dp"
-            android:src="@drawable/instagram"
+            android:src="@drawable/instagram_thick"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
