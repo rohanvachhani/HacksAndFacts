@@ -30,11 +30,9 @@ public class MyAdapter extends PagerAdapter {
     ConstraintLayout cl1, cl2;
     float pixelDensity;
 
-    ImageButton shareMagic;
-    ImageButton shareButton, backButton;
-    ImageView card_image, back_image;
 
-    static MediaPlayer mp;
+    ImageButton shareButton, backButton;
+    ImageView card_image;
     FrameLayout share_button_back;
 
 
@@ -68,11 +66,6 @@ public class MyAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
 
-
-                if (!mp.isPlaying()) {
-                    mp.start();
-
-                }
                 // Log.i("button", "share button clicked");
 
                 cl1 = main_view.findViewById(R.id.first_side);
@@ -86,10 +79,6 @@ public class MyAdapter extends PagerAdapter {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mp.isPlaying()) {
-                    mp.start();
-
-                }
 
                 cl1 = main_view.findViewById(R.id.first_side);
 
