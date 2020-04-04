@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +35,8 @@ public class ByUsers extends AppCompatActivity {
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
     FirebaseDatabase firebaseDatabase;
-    ImageView imageViewLogo, mainbackButton;
+    ImageView imageViewLogo;
+    ImageButton mainbackButton;
 
     private long startnow, endnow;
     static MyAdapter myAdapter;

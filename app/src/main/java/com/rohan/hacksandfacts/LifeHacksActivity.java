@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,7 +34,8 @@ public class LifeHacksActivity extends AppCompatActivity {
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
     FirebaseDatabase firebaseDatabase;
-    ImageView imageViewLogo, mainbackButton;
+    ImageView imageViewLogo;
+    ImageButton mainbackButton;
 
     private long startnow, endnow;
 
@@ -72,7 +74,7 @@ public class LifeHacksActivity extends AppCompatActivity {
         textViewTitle.startAnimation(a);
 
         Animation b = AnimationUtils.loadAnimation(this, R.anim.slide_up);
-        b.setStartOffset(1000);
+        b.setStartOffset(500);
 
         mainbackButton.startAnimation(b);
 

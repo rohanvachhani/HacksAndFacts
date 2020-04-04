@@ -6,12 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AboutUs extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView mainBackButton;
+    ImageButton mainBackButton;
     TextView t1, t2;
 
     @Override
@@ -36,7 +37,7 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
         t2.startAnimation(a);
 
         Animation b = AnimationUtils.loadAnimation(this, R.anim.slide_up);
-        b.setStartOffset(1000);
+        b.setStartOffset(500);
 
         mainBackButton.startAnimation(b);
 //        mainBackButton.startAnimation(myAnim);

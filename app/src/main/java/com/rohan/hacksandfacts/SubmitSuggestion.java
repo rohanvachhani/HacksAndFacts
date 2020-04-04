@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class SubmitSuggestion extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView instagramIcon, gmailIcon, mainBackButton, mainTextImageViews;
+    ImageView instagramIcon, gmailIcon, mainTextImageViews;
+    ImageButton mainBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class SubmitSuggestion extends AppCompatActivity implements View.OnClickL
 //        mainBackButton.startAnimation(myAnim);
 
         Animation b = AnimationUtils.loadAnimation(this, R.anim.slide_up);
-        b.setStartOffset(1000);
+        b.setStartOffset(500);
 
         mainBackButton.startAnimation(b);
 
