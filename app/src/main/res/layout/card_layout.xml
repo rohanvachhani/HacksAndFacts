@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -72,16 +70,16 @@
             <!--                app:layout_constraintStart_toStartOf="@+id/image_view_1" />-->
 
             <ImageButton
-                android:visibility="visible"
                 android:id="@+id/share_button"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@android:color/transparent"
-                android:paddingTop="55dp"
                 android:paddingStart="55dp"
+                android:paddingTop="55dp"
                 android:paddingEnd="8dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/share_button_yellow_90px"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/image_view_1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -106,19 +104,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <ImageButton-->
-<!--                android:id="@+id/whatsapp_button"-->
-<!--                android:layout_width="300dp"-->
-<!--                android:layout_height="300dp"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                android:layout_marginBottom="16dp"-->
-<!--                android:background="@drawable/whatsapp_imagebutton"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/second_side"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/whatsapp_button"-->
+            <!--                android:layout_width="300dp"-->
+            <!--                android:layout_height="300dp"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                android:layout_marginTop="16dp"-->
+            <!--                android:layout_marginEnd="16dp"-->
+            <!--                android:layout_marginBottom="16dp"-->
+            <!--                android:background="@drawable/whatsapp_imagebutton"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/second_side"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <FrameLayout
                 android:id="@+id/whatsapp_button"
@@ -130,15 +128,14 @@
                 app:layout_constraintTop_toTopOf="@+id/image_view_2" />
 
 
-
             <ImageButton
                 android:id="@+id/back_button"
 
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@android:color/transparent"
-                android:paddingTop="60dp"
                 android:paddingStart="60dp"
+                android:paddingTop="60dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="16dp"
                 android:scaleType="fitXY"

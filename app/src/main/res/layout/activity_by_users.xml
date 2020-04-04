@@ -27,18 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/img_view"-->
-    <!--        android:layout_width="100dp"-->
-    <!--        android:layout_height="100dp"-->
-    <!--        android:layout_marginStart="4dp"-->
-    <!--        android:src="@drawable/tree_logo"-->
-    <!--        android:transitionName="logoTransition"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"></ImageView>-->
     <fr.castorflex.android.circularprogressbar.CircularProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="40dp"
@@ -89,7 +77,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hicvp" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

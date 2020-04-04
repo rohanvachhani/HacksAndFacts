@@ -40,12 +40,20 @@
         <ImageView
             android:id="@+id/instagram_icon"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:paddingEnd="16dp"
-            android:src="@drawable/instagram_thick"
+            android:src="@drawable/instagram_logo"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <ImageView
+            android:id="@+id/info_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:src="@drawable/info" />
 
         <ImageView
             android:id="@+id/gmail_icon"
@@ -53,7 +61,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:src="@drawable/gmail"
+            android:src="@drawable/gmail_logo"
             app:layout_constraintStart_toEndOf="@+id/instagram_icon"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
     </LinearLayout>
@@ -61,7 +69,7 @@
 
     <ImageButton
         android:id="@+id/main_black_button"
-        android:layout_width="70px"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="64dp"

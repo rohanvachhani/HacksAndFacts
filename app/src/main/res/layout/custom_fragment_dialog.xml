@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/product_sans_regular"
+        android:gravity="left"
+        android:paddingStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Maximum words allowed is 30"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/product_sans_regular"
+
+        android:paddingStart="8dp"
+
+        android:text="If your submitted hack or fact is selected then we will add that hack/fact in our app's &quot;By Users&quot; catagory.\n"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/product_sans_regular"
+
+        android:paddingStart="8dp"
+        android:text="Note that It will take some time to review and publish."
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/product_sans_regular"
+
+        android:paddingStart="8dp"
+        android:text="\nIf you want to make your submitted hack of fact to shine on our Instagram page then you should include your Instagram User name with your submisison."
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/ok_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/boya_regular"
+
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:text="Ok"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+</LinearLayout>
