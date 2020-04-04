@@ -23,11 +23,6 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
 
         mainBackButton.setOnClickListener(this);
 
-        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
-        // Use bounce interpolator with amplitude 0.2 and frequency 20
-        AnimationBounceInterpolator interpolator = new AnimationBounceInterpolator(0.7, 30);
-        myAnim.setInterpolator(interpolator);
-
 
         t1 = findViewById(R.id.developer_one);
         t2 = findViewById(R.id.developer_two);
