@@ -23,6 +23,7 @@ public class SubmitSuggestion extends FragmentActivity implements View.OnClickLi
 
     ImageView instagramIcon, gmailIcon, mainTextImageViews, info_button;
     ImageButton mainBackButton;
+    private static int backPressCount = 0;
 
 
     @Override
@@ -48,6 +49,13 @@ public class SubmitSuggestion extends FragmentActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
+
+        if (backPressCount >= 1 && backPressCount % 2 == 0) {
+            //load interstitial ad
+
+            //load interstitial ad again on after ad load method (Override)
+        }
+        backPressCount++;
         super.onBackPressed();
         finish();
     }

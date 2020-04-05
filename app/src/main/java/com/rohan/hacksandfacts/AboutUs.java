@@ -14,6 +14,7 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton mainBackButton;
     TextView t1, t2;
+    private static int backPressCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,13 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() {
+
+        if (backPressCount >= 1 && backPressCount % 2 == 0) {
+            //load interstitial ad
+
+            //load interstitial ad again on after ad load method (Override)
+        }
+        backPressCount++;
         super.onBackPressed();
         finish();
 

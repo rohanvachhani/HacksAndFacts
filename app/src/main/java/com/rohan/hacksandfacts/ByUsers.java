@@ -31,7 +31,7 @@ public class ByUsers extends AppCompatActivity {
 
     List<String> listOfString = new ArrayList<>();
 
-    CardView c1;
+
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
     FirebaseDatabase firebaseDatabase;
@@ -43,6 +43,8 @@ public class ByUsers extends AppCompatActivity {
     CircularProgressBar circularProgressBar;
 
     TextView textViewTitle;
+
+    private static int backPressCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +127,13 @@ public class ByUsers extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+        if (backPressCount >= 1 && backPressCount % 2 == 0) {
+            //load interstitial ad
+
+            //load interstitial ad again on after ad load method (Override)
+        }
+        backPressCount++;
         super.onBackPressed();
         finish();
     }
