@@ -13,6 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -41,8 +49,8 @@ public class FunFactsActivity extends AppCompatActivity {
 
     static MyAdapter myAdapter;
     TextView textViewTitle;
+    private InterstitialAd mInterstitialAd;
 
-    private static int backPressCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +59,8 @@ public class FunFactsActivity extends AppCompatActivity {
 
         circularProgressBar = findViewById(R.id.progress_bar);
         circularProgressBar.setVisibility(View.VISIBLE);
+
+        initilizeADs();
         //firebase code
         firebaseDatabase = FirebaseDatabase.getInstance();
 
@@ -126,16 +136,51 @@ public class FunFactsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (backPressCount >= 1 && backPressCount % 2 == 0) {
+        if (MainApplication.GLOBAL_ADS_COUNTER >= 1 && MainApplication.GLOBAL_ADS_COUNTER % 2 == 0) {
             //load interstitial ad
-
+            //load interstitial ad
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
+            }
             //load interstitial ad again on after ad load method (Override)
         }
-        backPressCount++;
+        MainApplication.GLOBAL_ADS_COUNTER++;
+        Log.v("counter", String.valueOf(MainApplication.GLOBAL_ADS_COUNTER));
 
         super.onBackPressed();
         finish();
 
+    }
+
+    private void initilizeADs() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mInterstitialAd = new InterstitialAd(this);
+
+        //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+        RequestConfiguration requestConfiguration
+                = new RequestConfiguration.Builder()
+                .setTestDeviceIds(Arrays.asList("B6B92AB274C327E0B291D641F4D683BD"))
+                .build();
+
+        MobileAds.setRequestConfiguration(requestConfiguration);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
     }
 
     @Override

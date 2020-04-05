@@ -9,7 +9,6 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
 
-
     </style>
 
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">

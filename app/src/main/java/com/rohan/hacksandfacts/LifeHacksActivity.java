@@ -13,6 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -43,9 +51,7 @@ public class LifeHacksActivity extends AppCompatActivity {
     TextView textViewTitle;
     static MyAdapter myAdapter;
 
-    private static int backPressCount = 0;      //initially
-    // static MediaPlayer mp;
-
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +59,11 @@ public class LifeHacksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         circularProgressBar = findViewById(R.id.progress_bar);
         circularProgressBar.setVisibility(View.VISIBLE);
-        //overridePendingTransition(0, 0);
-        //splash screen shown first and then this code will be executed
+
+        initilizeADs();
 
         //firebase code
         firebaseDatabase = FirebaseDatabase.getInstance();
-
 
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         imageViewLogo = findViewById(R.id.img_view);
@@ -117,7 +122,6 @@ public class LifeHacksActivity extends AppCompatActivity {
 
                     //infiniteCycleViewPager.setOffscreenPageLimit(3);
 
-
                 } else {
                     //Toast.makeText(LifeHacksActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
                     Log.i("mytag", "in else no data snap shot is there!!!!");
@@ -133,16 +137,49 @@ public class LifeHacksActivity extends AppCompatActivity {
         });
     }
 
+    private void initilizeADs() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mInterstitialAd = new InterstitialAd(this);
+
+        //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+        RequestConfiguration requestConfiguration
+                = new RequestConfiguration.Builder()
+                .setTestDeviceIds(Arrays.asList("B6B92AB274C327E0B291D641F4D683BD"))
+                .build();
+
+        MobileAds.setRequestConfiguration(requestConfiguration);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
-
-        if (backPressCount >= 1 && backPressCount % 2 == 0) {
+        int count = MainApplication.GLOBAL_ADS_COUNTER;
+        if (count >= 1 && count % 2 == 0) {
             //load interstitial ad
-
-            //load interstitial ad again on after ad load method (Override)
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
+            }
         }
-        backPressCount++;
 
+        MainApplication.GLOBAL_ADS_COUNTER++;
+        Log.v("counter", String.valueOf(MainApplication.GLOBAL_ADS_COUNTER));
         super.onBackPressed();
         finish();
     }
