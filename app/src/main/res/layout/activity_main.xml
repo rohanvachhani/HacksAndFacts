@@ -8,13 +8,38 @@
     android:background="#fff"
     tools:context=".LifeHacksActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0"
+        app:layout_constraintGuide_begin="0dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08"
+        app:layout_constraintGuide_begin="0dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85"
+        app:layout_constraintGuide_begin="00dp" />
+
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
         android:fontFamily="@font/boya_regular"
         android:gravity="center"
+
         android:letterSpacing="0.5"
         android:text="Life Hacks"
         android:textAlignment="center"
@@ -22,21 +47,12 @@
         android:textColor="@android:color/black"
         android:textSize="36sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/guideline13"
+        app:layout_constraintVertical_bias="1.0" />
 
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/img_view"-->
-    <!--        android:layout_width="100dp"-->
-    <!--        android:layout_height="100dp"-->
-    <!--        android:layout_marginStart="4dp"-->
-    <!--        android:src="@drawable/tree_logo"-->
-    <!--        android:transitionName="logoTransition"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"></ImageView>-->
     <fr.castorflex.android.circularprogressbar.CircularProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="40dp"
@@ -66,27 +82,23 @@
         app:icvp_min_page_scale="0.5"
         app:icvp_min_page_scale_offset="5dp"
         app:icvp_scroll_duration="500"
-        app:layout_constraintBottom_toTopOf="@+id/main_black_button"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
     <ImageButton
         android:id="@+id/main_black_button"
-        android:layout_width="70px"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="64dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:padding="0dp"
         android:scaleType="fitCenter"
         android:src="@drawable/back_black"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hicvp" />
+        app:layout_constraintTop_toTopOf="@+id/guideline15" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
