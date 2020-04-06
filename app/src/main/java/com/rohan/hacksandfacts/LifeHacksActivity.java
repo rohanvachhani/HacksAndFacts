@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.google.android.gms.ads.AdListener;
@@ -120,6 +121,23 @@ public class LifeHacksActivity extends AppCompatActivity {
                     myAdapter = new MyAdapter(LifeHacksActivity.this, listOfString);
                     infiniteCycleViewPager.setAdapter(myAdapter);
 
+                    infiniteCycleViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                        }
+
+                        @Override
+                        public void onPageSelected(int position) {
+                            // showAd();
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+
+                        }
+                    });
+
                     //infiniteCycleViewPager.setOffscreenPageLimit(3);
 
                 } else {
@@ -168,8 +186,17 @@ public class LifeHacksActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+        //showAd();
+
+        Log.v("counter", String.valueOf(MainApplication.GLOBAL_ADS_COUNTER));
+        super.onBackPressed();
+        finish();
+    }
+
+    private void showAd() {
         int count = MainApplication.GLOBAL_ADS_COUNTER;
-        if (count >= 1 && count % 2 == 0) {
+        if (count >= 10 && count % 5 == 0) {
             //load interstitial ad
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
@@ -179,9 +206,6 @@ public class LifeHacksActivity extends AppCompatActivity {
         }
 
         MainApplication.GLOBAL_ADS_COUNTER++;
-        Log.v("counter", String.valueOf(MainApplication.GLOBAL_ADS_COUNTER));
-        super.onBackPressed();
-        finish();
     }
 
     @Override

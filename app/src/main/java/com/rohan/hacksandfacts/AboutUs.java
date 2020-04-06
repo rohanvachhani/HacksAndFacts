@@ -1,15 +1,14 @@
 package com.rohan.hacksandfacts;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -88,24 +87,24 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
             }
         });
     }
+
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
-        if (MainApplication.GLOBAL_ADS_COUNTER >= 1 && MainApplication.GLOBAL_ADS_COUNTER % 2 == 0) {
+    private void showAd() {
+        int count = MainApplication.GLOBAL_ADS_COUNTER;
+        if (count >= 10 && count % 5 == 0) {
             //load interstitial ad
-
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
             } else {
                 Log.d("TAG", "The interstitial wasn't loaded yet.");
             }
-            //load interstitial ad again on after ad load method (Override)
         }
+
         MainApplication.GLOBAL_ADS_COUNTER++;
-        Log.v("counter", String.valueOf(MainApplication.GLOBAL_ADS_COUNTER));
-
-        super.onBackPressed();
-        finish();
-
     }
 }

@@ -1,24 +1,17 @@
 package com.rohan.hacksandfacts;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -63,20 +56,6 @@ public class SubmitSuggestion extends FragmentActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
-
-        if (MainApplication.GLOBAL_ADS_COUNTER >= 1 && MainApplication.GLOBAL_ADS_COUNTER % 2 == 0) {
-            //load interstitial ad
-
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-            } else {
-                Log.d("TAG", "The interstitial wasn't loaded yet.");
-            }
-            //load interstitial ad again on after ad load method (Override)
-        }
-        MainApplication.GLOBAL_ADS_COUNTER++;
-        Log.v("counter", String.valueOf(MainApplication.GLOBAL_ADS_COUNTER));
-        
         super.onBackPressed();
         finish();
     }
@@ -142,5 +121,19 @@ public class SubmitSuggestion extends FragmentActivity implements View.OnClickLi
                 customDialogFragment.show(getSupportFragmentManager(), "customDialogFragment");
                 break;
         }
+    }
+
+    private void showAd() {
+        int count = MainApplication.GLOBAL_ADS_COUNTER;
+        if (count >= 10 && count % 5 == 0) {
+            //load interstitial ad
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
+            }
+        }
+
+        MainApplication.GLOBAL_ADS_COUNTER++;
     }
 }

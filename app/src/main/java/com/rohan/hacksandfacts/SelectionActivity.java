@@ -23,7 +23,6 @@ public class SelectionActivity extends AppCompatActivity {
 
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

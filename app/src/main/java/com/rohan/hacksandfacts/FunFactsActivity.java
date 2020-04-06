@@ -67,7 +67,6 @@ public class FunFactsActivity extends AppCompatActivity {
         infiniteCycleViewPager = findViewById(R.id.hicvp);
         imageViewLogo = findViewById(R.id.img_view);
 
-
         mainbackButton = findViewById(R.id.main_black_button);
         mainbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,15 +85,8 @@ public class FunFactsActivity extends AppCompatActivity {
 
         mainbackButton.startAnimation(b);
 
-//        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
-//        // Use bounce interpolator with amplitude 0.7 and frequency 30
-//        AnimationBounceInterpolator interpolator = new AnimationBounceInterpolator(0.7, 30);
-//        myAnim.setInterpolator(interpolator);
-//        mainbackButton.startAnimation(myAnim);
-
         DatabaseReference databaseReference = firebaseDatabase.getReference("fun_facts");
         databaseReference.keepSynced(true);
-
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -136,19 +128,6 @@ public class FunFactsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (MainApplication.GLOBAL_ADS_COUNTER >= 1 && MainApplication.GLOBAL_ADS_COUNTER % 2 == 0) {
-            //load interstitial ad
-            //load interstitial ad
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-            } else {
-                Log.d("TAG", "The interstitial wasn't loaded yet.");
-            }
-            //load interstitial ad again on after ad load method (Override)
-        }
-        MainApplication.GLOBAL_ADS_COUNTER++;
-        Log.v("counter", String.valueOf(MainApplication.GLOBAL_ADS_COUNTER));
-
         super.onBackPressed();
         finish();
 
@@ -188,5 +167,19 @@ public class FunFactsActivity extends AppCompatActivity {
         super.onDestroy();
         myAdapter = null;
         Runtime.getRuntime().gc();
+    }
+
+    private void showAd() {
+        int count = MainApplication.GLOBAL_ADS_COUNTER;
+        if (count >= 10 && count % 5 == 0) {
+            //load interstitial ad
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
+            }
+        }
+
+        MainApplication.GLOBAL_ADS_COUNTER++;
     }
 }
