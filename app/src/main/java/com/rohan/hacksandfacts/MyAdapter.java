@@ -19,6 +19,15 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class MyAdapter extends PagerAdapter {
@@ -29,10 +38,11 @@ public class MyAdapter extends PagerAdapter {
     boolean isAnimationActive = false;
     ConstraintLayout cl1, cl2;
     float pixelDensity;
-    
+
     ImageButton shareButton, backButton;
     ImageView card_image;
     FrameLayout share_button_back;
+    private static InterstitialAd mInterstitialAd;
 
 
     public MyAdapter(Context context, List<String> listOfString) {
@@ -40,6 +50,7 @@ public class MyAdapter extends PagerAdapter {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         pixelDensity = context.getResources().getDisplayMetrics().density;
+        initilizeADs();
     }
 
     @NonNull
@@ -62,7 +73,7 @@ public class MyAdapter extends PagerAdapter {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showAd();
                 cl1 = main_view.findViewById(R.id.first_side);
                 cl2 = main_view.findViewById(R.id.second_side);
 
@@ -74,6 +85,7 @@ public class MyAdapter extends PagerAdapter {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 cl1 = main_view.findViewById(R.id.first_side);
 
@@ -88,6 +100,7 @@ public class MyAdapter extends PagerAdapter {
         share_button_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String shareBody = tv.getText().toString().trim();
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
@@ -207,6 +220,51 @@ public class MyAdapter extends PagerAdapter {
         if (!isAnimationActive) {
             anim.start();
         }
+    }
+
+
+    private void initilizeADs() {
+        MobileAds.initialize(context, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mInterstitialAd = new InterstitialAd(context);
+
+        mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_test_ad_id));
+
+        RequestConfiguration requestConfiguration
+                = new RequestConfiguration.Builder()
+                .setTestDeviceIds(Arrays.asList(context.getResources().getString(R.string.test_device_id)))
+                .build();
+
+        MobileAds.setRequestConfiguration(requestConfiguration);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                //Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
+    }
+
+    public static void showAd() {
+        int count = MainApplication.GLOBAL_ADS_COUNTER_SHARE_BUTTON;
+        if (count >= 1 && count % 3 == 0) {
+            //load interstitial ad
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+                Log.v("r_log", "(MyAdapater(for all cards's share button) class: The interstitial loaded successfully.");
+            } else {
+                Log.v("r_log", "(MyAdapater(for all cards's share button) class: The interstitial wasn't loaded yet.");
+            }
+        }
+
+        MainApplication.GLOBAL_ADS_COUNTER_SHARE_BUTTON++;
+        Log.v("r_log", "MyAdapater(for all cards's share button) class: share button ad Global Counter value: " + MainApplication.GLOBAL_ADS_COUNTER_SHARE_BUTTON);
     }
 
 

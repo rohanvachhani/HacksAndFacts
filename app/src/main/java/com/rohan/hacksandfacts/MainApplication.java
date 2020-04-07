@@ -9,6 +9,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainApplication extends Application {
 
     public static int GLOBAL_ADS_COUNTER = 0;
+    public static int GLOBAL_ADS_COUNTER_SHARE_BUTTON = 0;
+    public static int GLOBAL_ADS_COUNTER_SUBMIT_SUGGESTION = 0;
 
 
     @Override

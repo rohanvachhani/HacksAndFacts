@@ -13,8 +13,6 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.gms.ads.InterstitialAd;
-
 public class SubmitSuggestion extends FragmentActivity implements View.OnClickListener {
 
     ImageView instagramIcon, gmailIcon, mainTextImageViews, info_button;

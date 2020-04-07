@@ -47,7 +47,6 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
         b.setStartOffset(500);
 
         mainBackButton.startAnimation(b);
-//        mainBackButton.startAnimation(myAnim);
     }
 
 

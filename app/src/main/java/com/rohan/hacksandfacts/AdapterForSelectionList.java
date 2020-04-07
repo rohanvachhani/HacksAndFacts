@@ -61,8 +61,6 @@ public class AdapterForSelectionList extends PagerAdapter {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(context, "card text: " + tv.getText(), Toast.LENGTH_SHORT).show();
-
                 switch (tv.getText().toString().trim().toLowerCase()) {
                     case "life hacks":
                         i = new Intent(v.getContext(), LifeHacksActivity.class);
@@ -104,11 +102,11 @@ public class AdapterForSelectionList extends PagerAdapter {
 
         mInterstitialAd = new InterstitialAd(context);
 
-        mInterstitialAd.setAdUnitId(String.valueOf(R.string.interstitial_test_ad_id));
+        mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_test_ad_id));
 
         RequestConfiguration requestConfiguration
                 = new RequestConfiguration.Builder()
-                .setTestDeviceIds(Arrays.asList(String.valueOf(R.string.test_device_id)))
+                .setTestDeviceIds(Arrays.asList(context.getResources().getString(R.string.test_device_id)))
                 .build();
 
         MobileAds.setRequestConfiguration(requestConfiguration);
@@ -124,8 +122,8 @@ public class AdapterForSelectionList extends PagerAdapter {
     }
 
     public static void showAd() {
-        int count = MainApplication.GLOBAL_ADS_COUNTER;
-        if (count >= 1 && count % 2 == 0) {
+        int count = MainApplication.GLOBAL_ADS_COUNTER_SUBMIT_SUGGESTION;
+        if (count >= 2 && count % 2 == 0) {
             //load interstitial ad
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
@@ -135,8 +133,8 @@ public class AdapterForSelectionList extends PagerAdapter {
             }
         }
 
-        MainApplication.GLOBAL_ADS_COUNTER++;
-        Log.v("r_log", "(Selection List activity adapter class): Global Counter value: " + MainApplication.GLOBAL_ADS_COUNTER);
+        MainApplication.GLOBAL_ADS_COUNTER_SUBMIT_SUGGESTION++;
+        Log.v("r_log", "(Selection List activity adapter class): selection list ads Global Counter value: " + MainApplication.GLOBAL_ADS_COUNTER_SUBMIT_SUGGESTION);
     }
 
 

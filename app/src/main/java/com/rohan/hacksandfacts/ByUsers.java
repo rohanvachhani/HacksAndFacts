@@ -158,11 +158,11 @@ public class ByUsers extends AppCompatActivity {
 
         mInterstitialAd = new InterstitialAd(this);
 
-        mInterstitialAd.setAdUnitId(String.valueOf(R.string.interstitial_test_ad_id));
+        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_test_ad_id));
 
         RequestConfiguration requestConfiguration
                 = new RequestConfiguration.Builder()
-                .setTestDeviceIds(Arrays.asList(String.valueOf(R.string.test_device_id)))
+                .setTestDeviceIds(Arrays.asList(getResources().getString(R.string.test_device_id)))
                 .build();
 
         MobileAds.setRequestConfiguration(requestConfiguration);
@@ -179,7 +179,7 @@ public class ByUsers extends AppCompatActivity {
 
     private void showAd() {
         int count = MainApplication.GLOBAL_ADS_COUNTER;
-        if (count >= 5 && count % 5 == 0) {
+        if (count >= 2 && count % 12 == 0) {
             //load interstitial ad
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
@@ -188,6 +188,7 @@ public class ByUsers extends AppCompatActivity {
                 Log.v("r_log", "(Byusers activity): The interstitial wasn't loaded yet.");
             }
         }
+
 
         MainApplication.GLOBAL_ADS_COUNTER++;
         Log.v("r_log", "(Byusers activity): Global Counter value: " + MainApplication.GLOBAL_ADS_COUNTER);
