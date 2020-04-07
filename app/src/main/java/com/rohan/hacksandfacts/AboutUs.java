@@ -25,14 +25,13 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
     ImageButton mainBackButton;
     TextView t1, t2;
     private static int backPressCount = 0;
-    private InterstitialAd mInterstitialAd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
-        initilizeADs();
 
         mainBackButton = findViewById(R.id.main_black_button);
 
@@ -59,34 +58,7 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
         onBackPressed();
     }
 
-    private void initilizeADs() {
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
 
-        mInterstitialAd = new InterstitialAd(this);
-
-        //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-
-        RequestConfiguration requestConfiguration
-                = new RequestConfiguration.Builder()
-                .setTestDeviceIds(Arrays.asList("B6B92AB274C327E0B291D641F4D683BD"))
-                .build();
-
-        MobileAds.setRequestConfiguration(requestConfiguration);
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        });
-    }
 
     @Override
     public void onBackPressed() {
@@ -94,17 +66,5 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
         finish();
     }
 
-    private void showAd() {
-        int count = MainApplication.GLOBAL_ADS_COUNTER;
-        if (count >= 10 && count % 5 == 0) {
-            //load interstitial ad
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-            } else {
-                Log.d("TAG", "The interstitial wasn't loaded yet.");
-            }
-        }
 
-        MainApplication.GLOBAL_ADS_COUNTER++;
-    }
 }

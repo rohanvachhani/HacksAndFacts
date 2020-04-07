@@ -129,7 +129,7 @@ public class LifeHacksActivity extends AppCompatActivity {
 
                         @Override
                         public void onPageSelected(int position) {
-                            // showAd();
+                            showAd();
                         }
 
                         @Override
@@ -165,11 +165,11 @@ public class LifeHacksActivity extends AppCompatActivity {
         mInterstitialAd = new InterstitialAd(this);
 
         //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId(String.valueOf(R.string.interstitial_test_ad_id));
 
         RequestConfiguration requestConfiguration
                 = new RequestConfiguration.Builder()
-                .setTestDeviceIds(Arrays.asList("B6B92AB274C327E0B291D641F4D683BD"))
+                .setTestDeviceIds(Arrays.asList(String.valueOf(R.string.test_device_id)))
                 .build();
 
         MobileAds.setRequestConfiguration(requestConfiguration);
@@ -196,7 +196,7 @@ public class LifeHacksActivity extends AppCompatActivity {
 
     private void showAd() {
         int count = MainApplication.GLOBAL_ADS_COUNTER;
-        if (count >= 10 && count % 5 == 0) {
+        if (count >= 5 && count % 5 == 0) {
             //load interstitial ad
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.google.android.gms.ads.AdListener;
@@ -108,6 +109,24 @@ public class FunFactsActivity extends AppCompatActivity {
                     }
                     MyAdapter myAdapter = new MyAdapter(FunFactsActivity.this, listOfString);
                     infiniteCycleViewPager.setAdapter(myAdapter);
+
+                    infiniteCycleViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                        }
+
+                        @Override
+                        public void onPageSelected(int position) {
+                            showAd();
+
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+
+                        }
+                    });
                     //infiniteCycleViewPager.setOffscreenPageLimit(3);
 
                 } else {
@@ -143,11 +162,11 @@ public class FunFactsActivity extends AppCompatActivity {
         mInterstitialAd = new InterstitialAd(this);
 
         //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId(String.valueOf(R.string.interstitial_test_ad_id));
 
         RequestConfiguration requestConfiguration
                 = new RequestConfiguration.Builder()
-                .setTestDeviceIds(Arrays.asList("B6B92AB274C327E0B291D641F4D683BD"))
+                .setTestDeviceIds(Arrays.asList(String.valueOf(R.string.test_device_id)))
                 .build();
 
         MobileAds.setRequestConfiguration(requestConfiguration);
@@ -171,7 +190,7 @@ public class FunFactsActivity extends AppCompatActivity {
 
     private void showAd() {
         int count = MainApplication.GLOBAL_ADS_COUNTER;
-        if (count >= 10 && count % 5 == 0) {
+        if (count >= 5 && count % 5 == 0) {
             //load interstitial ad
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
@@ -179,7 +198,6 @@ public class FunFactsActivity extends AppCompatActivity {
                 Log.d("TAG", "The interstitial wasn't loaded yet.");
             }
         }
-
         MainApplication.GLOBAL_ADS_COUNTER++;
     }
 }

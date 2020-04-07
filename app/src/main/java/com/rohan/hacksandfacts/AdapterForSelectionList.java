@@ -3,6 +3,7 @@ package com.rohan.hacksandfacts;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class AdapterForSelectionList extends PagerAdapter {
     private final List<String> listOfString;
     private final Context context;
+    private static InterstitialAd mInterstitialAd;
     private final LayoutInflater layoutInflater;
 
 
@@ -25,6 +36,7 @@ public class AdapterForSelectionList extends PagerAdapter {
         this.listOfString = listOfString;
         this.context = applicationContext;
         this.layoutInflater = LayoutInflater.from(context);
+        initilizeADs();
     }
 
     @Override
@@ -62,6 +74,7 @@ public class AdapterForSelectionList extends PagerAdapter {
                         i = new Intent(v.getContext(), ByUsers.class);
                         break;
                     case "submit your hacks or facts":
+                        showAd();
                         i = new Intent(v.getContext(), SubmitSuggestion.class);
                         break;
                     case "about us":
@@ -80,4 +93,49 @@ public class AdapterForSelectionList extends PagerAdapter {
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
     }
+
+    public static void showAd() {
+        int count = MainApplication.GLOBAL_ADS_COUNTER;
+        if (count >= 1 && count % 2 == 0) {
+            //load interstitial ad
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
+            }
+        }
+
+        MainApplication.GLOBAL_ADS_COUNTER++;
+    }
+
+    private void initilizeADs() {
+        MobileAds.initialize(context, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mInterstitialAd = new InterstitialAd(context);
+
+        //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
+        mInterstitialAd.setAdUnitId(String.valueOf(R.string.interstitial_test_ad_id));
+
+        RequestConfiguration requestConfiguration
+                = new RequestConfiguration.Builder()
+                .setTestDeviceIds(Arrays.asList(String.valueOf(R.string.test_device_id)))
+                .build();
+
+        MobileAds.setRequestConfiguration(requestConfiguration);
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                //Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
+    }
+
+
 }

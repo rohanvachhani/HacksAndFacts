@@ -5,4 +5,18 @@
     <string name="by_users">By Users</string>
 
     <string name="submit_suggestion">Share us your interesting and creative Hacks or Facts</string>
+
+    <string name="app_id">ca-app-pub-7143736124693495~5594318593</string>
+    <string name="test_device_id">B6B92AB274C327E0B291D641F4D683BD</string>
+
+    <string name="interstitial_test_ad_id">ca-app-pub-3940256099942544/1033173712</string>
+
+    <string name="interstitial_ad_unit_1_id">ca-app-pub-7143736124693495/1364070178</string>
+
+    <string name="interstitial_ad_unit_2_id">ca-app-pub-7143736124693495/7362873443</string>
+
+    <string name="interstitial_ad_unit_3_id">ca-app-pub-7143736124693495/2127052151</string>
+
+    <string name="interstitial_ad_unit_4_id">ca-app-pub-7143736124693495/4419895775</string>
+
 </resources>
