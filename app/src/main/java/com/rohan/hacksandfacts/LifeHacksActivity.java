@@ -86,16 +86,8 @@ public class LifeHacksActivity extends AppCompatActivity {
 
         mainbackButton.startAnimation(b);
 
-//        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
-//        // Use bounce interpolator with amplitude 0.7 and frequency 30
-//        AnimationBounceInterpolator interpolator = new AnimationBounceInterpolator(0.7, 30);
-//        myAnim.setInterpolator(interpolator);
-//        mainbackButton.startAnimation(myAnim);
-
-        //mp = MediaPlayer.create(LifeHacksActivity.this, R.raw.book_flip);
         DatabaseReference databaseReference = firebaseDatabase.getReference("life_hacks");
         databaseReference.keepSynced(true);
-
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -107,16 +99,18 @@ public class LifeHacksActivity extends AppCompatActivity {
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         listOfString.add(ds.child("A").getValue().toString().trim());
-                        //Log.i("data", ds.child("A").getValue().toString());
                     }
                     endnow = android.os.SystemClock.uptimeMillis();
-                    Log.d("MYTAG", "Execution time: " + (endnow - startnow) + " ms");
+                    Log.v("r_log", "(LifeHacks activity): Execution time: " + (endnow - startnow) + " ms");
 
+                    Log.v("r_log", "(Lifehacks activity): Life hacks string list size: " + listOfString.size());
 
                     //shuffle the list of string
                     if (listOfString.size() > 2) {
                         Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
+                        Log.v("r_log", "(Lifehacks activity): list shuffled successfully.");
                     }
+
 
                     myAdapter = new MyAdapter(LifeHacksActivity.this, listOfString);
                     infiniteCycleViewPager.setAdapter(myAdapter);
@@ -141,16 +135,14 @@ public class LifeHacksActivity extends AppCompatActivity {
                     //infiniteCycleViewPager.setOffscreenPageLimit(3);
 
                 } else {
-                    //Toast.makeText(LifeHacksActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
-                    Log.i("mytag", "in else no data snap shot is there!!!!");
+                    Log.v("r_log", "(LifeHacks activity) : in else no data snap shot is there!!!!");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
                 circularProgressBar.setVisibility(View.GONE);
-                //Toast.makeText(LifeHacksActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
+                Log.v("r_log", "(LifeHacks activity) : in onCancelled method of Firebase DatabaseError");
             }
         });
     }
@@ -164,7 +156,6 @@ public class LifeHacksActivity extends AppCompatActivity {
 
         mInterstitialAd = new InterstitialAd(this);
 
-        //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
         mInterstitialAd.setAdUnitId(String.valueOf(R.string.interstitial_test_ad_id));
 
         RequestConfiguration requestConfiguration
@@ -178,21 +169,11 @@ public class LifeHacksActivity extends AppCompatActivity {
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
-                // Load the next interstitial.
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
         });
     }
 
-    @Override
-    public void onBackPressed() {
-
-        //showAd();
-
-        Log.v("counter", String.valueOf(MainApplication.GLOBAL_ADS_COUNTER));
-        super.onBackPressed();
-        finish();
-    }
 
     private void showAd() {
         int count = MainApplication.GLOBAL_ADS_COUNTER;
@@ -200,12 +181,22 @@ public class LifeHacksActivity extends AppCompatActivity {
             //load interstitial ad
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
+                Log.v("r_log", "(Lifehacks activity): The interstitial loaded successfully.");
             } else {
-                Log.d("TAG", "The interstitial wasn't loaded yet.");
+                Log.v("r_log", "(Lifehacks activity): The interstitial wasn't loaded yet.");
             }
         }
 
         MainApplication.GLOBAL_ADS_COUNTER++;
+        Log.v("r_log", "(Lifehacks activity): Global Counter value: " + MainApplication.GLOBAL_ADS_COUNTER);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+        finish();
+        Log.v("r_log", "(Lifehacks activity): back pressed successfully.");
     }
 
     @Override
@@ -214,4 +205,5 @@ public class LifeHacksActivity extends AppCompatActivity {
         myAdapter = null;
         Runtime.getRuntime().gc();
     }
+
 }

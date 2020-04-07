@@ -13,30 +13,18 @@ import android.widget.ImageView;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.RequestConfiguration;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-
-import java.util.Arrays;
 
 public class SubmitSuggestion extends FragmentActivity implements View.OnClickListener {
 
     ImageView instagramIcon, gmailIcon, mainTextImageViews, info_button;
     ImageButton mainBackButton;
-    private static int backPressCount = 0;
-    private InterstitialAd mInterstitialAd;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_suggestion);
-
-        initilizeADs();
 
         instagramIcon = findViewById(R.id.instagram_icon);
         gmailIcon = findViewById(R.id.gmail_icon);
@@ -54,40 +42,6 @@ public class SubmitSuggestion extends FragmentActivity implements View.OnClickLi
         mainBackButton.startAnimation(b);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
-
-    private void initilizeADs() {
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        mInterstitialAd = new InterstitialAd(this);
-
-        //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-
-        RequestConfiguration requestConfiguration
-                = new RequestConfiguration.Builder()
-                .setTestDeviceIds(Arrays.asList("B6B92AB274C327E0B291D641F4D683BD"))
-                .build();
-
-        MobileAds.setRequestConfiguration(requestConfiguration);
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        });
-    }
 
     @Override
     public void onClick(View v) {
@@ -123,17 +77,10 @@ public class SubmitSuggestion extends FragmentActivity implements View.OnClickLi
         }
     }
 
-    private void showAd() {
-        int count = MainApplication.GLOBAL_ADS_COUNTER;
-        if (count >= 10 && count % 5 == 0) {
-            //load interstitial ad
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-            } else {
-                Log.d("TAG", "The interstitial wasn't loaded yet.");
-            }
-        }
-
-        MainApplication.GLOBAL_ADS_COUNTER++;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Log.v("r_log", "(Submit suggestion activity): back pressed successfully.");
     }
 }

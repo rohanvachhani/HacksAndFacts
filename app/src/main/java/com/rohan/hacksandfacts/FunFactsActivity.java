@@ -102,10 +102,13 @@ public class FunFactsActivity extends AppCompatActivity {
                         //Log.i("data", ds.child("A").getValue().toString());
                     }
                     endnow = android.os.SystemClock.uptimeMillis();
+                    Log.v("r_log", "(Funfacts activity): Execution time: " + (endnow - startnow) + " ms");
 
+                    Log.v("r_log", "(Funfacts activity): Fun facts string list size: " + listOfString.size());
                     //shuffle the list of string
                     if (listOfString.size() > 2) {
                         Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
+                        Log.v("r_log", "(Funfacts activity): list shuffled successfully.");
                     }
                     MyAdapter myAdapter = new MyAdapter(FunFactsActivity.this, listOfString);
                     infiniteCycleViewPager.setAdapter(myAdapter);
@@ -130,27 +133,18 @@ public class FunFactsActivity extends AppCompatActivity {
                     //infiniteCycleViewPager.setOffscreenPageLimit(3);
 
                 } else {
-
-                    // Toast.makeText(FunFactsActivity.this, "No data Loaded!", Toast.LENGTH_SHORT).show();
-                    Log.i("mytag", "in else no data snap shot is there!!!!");
+                    Log.v("r_log", "(Funfacts activity) : in else no data snap shot is there!!!!");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 circularProgressBar.setVisibility(View.GONE);
-                // Toast.makeText(FunFactsActivity.this, "in On cancelled method", Toast.LENGTH_SHORT).show();
+                Log.v("r_log", "(Funfacts activity) : in onCancelled method of Firebase DatabaseError");
             }
         });
     }
 
-    @Override
-    public void onBackPressed() {
-
-        super.onBackPressed();
-        finish();
-
-    }
 
     private void initilizeADs() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -161,7 +155,6 @@ public class FunFactsActivity extends AppCompatActivity {
 
         mInterstitialAd = new InterstitialAd(this);
 
-        //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
         mInterstitialAd.setAdUnitId(String.valueOf(R.string.interstitial_test_ad_id));
 
         RequestConfiguration requestConfiguration
@@ -181,6 +174,30 @@ public class FunFactsActivity extends AppCompatActivity {
         });
     }
 
+    private void showAd() {
+        int count = MainApplication.GLOBAL_ADS_COUNTER;
+        if (count >= 5 && count % 5 == 0) {
+            //load interstitial ad
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+                Log.v("r_log", "(Funfacts activity): The interstitial loaded successfully.");
+            } else {
+                Log.v("r_log", "(Funfacts activity): The interstitial wasn't loaded yet.");
+            }
+        }
+        MainApplication.GLOBAL_ADS_COUNTER++;
+        Log.v("r_log", "(Funfacts activity): Global Counter value: " + MainApplication.GLOBAL_ADS_COUNTER);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+        finish();
+        Log.v("r_log", "(Funfacts activity): back pressed successfully.");
+
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -188,16 +205,5 @@ public class FunFactsActivity extends AppCompatActivity {
         Runtime.getRuntime().gc();
     }
 
-    private void showAd() {
-        int count = MainApplication.GLOBAL_ADS_COUNTER;
-        if (count >= 5 && count % 5 == 0) {
-            //load interstitial ad
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-            } else {
-                Log.d("TAG", "The interstitial wasn't loaded yet.");
-            }
-        }
-        MainApplication.GLOBAL_ADS_COUNTER++;
-    }
+
 }

@@ -94,19 +94,6 @@ public class AdapterForSelectionList extends PagerAdapter {
         container.removeView((View) object);
     }
 
-    public static void showAd() {
-        int count = MainApplication.GLOBAL_ADS_COUNTER;
-        if (count >= 1 && count % 2 == 0) {
-            //load interstitial ad
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
-            } else {
-                Log.d("TAG", "The interstitial wasn't loaded yet.");
-            }
-        }
-
-        MainApplication.GLOBAL_ADS_COUNTER++;
-    }
 
     private void initilizeADs() {
         MobileAds.initialize(context, new OnInitializationCompleteListener() {
@@ -117,7 +104,6 @@ public class AdapterForSelectionList extends PagerAdapter {
 
         mInterstitialAd = new InterstitialAd(context);
 
-        //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
         mInterstitialAd.setAdUnitId(String.valueOf(R.string.interstitial_test_ad_id));
 
         RequestConfiguration requestConfiguration
@@ -135,6 +121,22 @@ public class AdapterForSelectionList extends PagerAdapter {
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
         });
+    }
+
+    public static void showAd() {
+        int count = MainApplication.GLOBAL_ADS_COUNTER;
+        if (count >= 1 && count % 2 == 0) {
+            //load interstitial ad
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+                Log.v("r_log", "(Selection List activity adapter class): The interstitial loaded successfully.");
+            } else {
+                Log.v("r_log", "(Selection List activity adapter class): The interstitial wasn't loaded yet.");
+            }
+        }
+
+        MainApplication.GLOBAL_ADS_COUNTER++;
+        Log.v("r_log", "(Selection List activity adapter class): Global Counter value: " + MainApplication.GLOBAL_ADS_COUNTER);
     }
 
 

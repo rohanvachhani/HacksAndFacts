@@ -45,6 +45,7 @@ public class CustomDialogFragment extends DialogFragment {
             }
         });
 
+
         return view;
     }
 }

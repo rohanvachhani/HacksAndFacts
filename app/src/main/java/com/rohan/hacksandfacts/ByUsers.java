@@ -87,15 +87,6 @@ public class ByUsers extends AppCompatActivity {
         b.setStartOffset(1000);
         mainbackButton.startAnimation(b);
 
-
-//        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
-//
-//        // Use bounce interpolator with amplitude 0.7 and frequency 30
-//        AnimationBounceInterpolator interpolator = new AnimationBounceInterpolator(0.7, 30);
-//        myAnim.setInterpolator(interpolator);
-//        mainbackButton.startAnimation(myAnim);
-
-
         DatabaseReference databaseReference = firebaseDatabase.getReference("user_choice");
         databaseReference.keepSynced(true);
 
@@ -113,10 +104,14 @@ public class ByUsers extends AppCompatActivity {
 
                     endnow = android.os.SystemClock.uptimeMillis();
 
+                    Log.v("r_log", "(Byusers activity): Execution time: " + (endnow - startnow) + " ms");
+
+                    Log.v("r_log", "(Byusers activity): By users string list size: " + listOfString.size());
 
                     //shuffle the list of string
                     if (listOfString.size() > 2) {
                         Collections.shuffle(listOfString, new Random(1 + new Random().nextInt(listOfString.size() - 2)));
+                        Log.v("r_log", "(Byusers activity): list shuffled successfully.");
                     }
 
                     myAdapter = new MyAdapter(ByUsers.this, listOfString);
@@ -141,24 +136,18 @@ public class ByUsers extends AppCompatActivity {
                     //infiniteCycleViewPager.setOffscreenPageLimit(3);
 
                 } else {
-                    Log.i("mytag", "in else no data snap shot is there!!!!");
+                    Log.v("r_log", "(Byusers activity) : in else no data snap shot is there!!!!");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 circularProgressBar.setVisibility(View.GONE);
+                Log.v("r_log", "(Byusers activity) : in onCancelled method of Firebase DatabaseError");
             }
         });
     }
 
-    @Override
-    public void onBackPressed() {
-
-
-        super.onBackPressed();
-        finish();
-    }
 
     private void initilizeADs() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -169,7 +158,6 @@ public class ByUsers extends AppCompatActivity {
 
         mInterstitialAd = new InterstitialAd(this);
 
-        //Test interstitial Ad unit ID:  ca-app-pub-3940256099942544/1033173712
         mInterstitialAd.setAdUnitId(String.valueOf(R.string.interstitial_test_ad_id));
 
         RequestConfiguration requestConfiguration
@@ -195,12 +183,22 @@ public class ByUsers extends AppCompatActivity {
             //load interstitial ad
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
+                Log.v("r_log", "(Byusers activity): The interstitial loaded successfully.");
             } else {
-                Log.d("TAG", "The interstitial wasn't loaded yet.");
+                Log.v("r_log", "(Byusers activity): The interstitial wasn't loaded yet.");
             }
         }
 
         MainApplication.GLOBAL_ADS_COUNTER++;
+        Log.v("r_log", "(Byusers activity): Global Counter value: " + MainApplication.GLOBAL_ADS_COUNTER);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Log.v("r_log", "(Byusers activity): back pressed successfully.");
     }
 
     @Override
@@ -208,6 +206,5 @@ public class ByUsers extends AppCompatActivity {
         super.onDestroy();
         myAdapter = null;
         Runtime.getRuntime().gc();
-
     }
 }

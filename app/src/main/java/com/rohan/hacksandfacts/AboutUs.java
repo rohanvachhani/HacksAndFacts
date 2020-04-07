@@ -24,8 +24,6 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton mainBackButton;
     TextView t1, t2;
-    private static int backPressCount = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +57,11 @@ public class AboutUs extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+        Log.v("r_log", "(Aboutus activity): back pressed successfully.");
     }
 
 

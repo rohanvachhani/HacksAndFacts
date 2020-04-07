@@ -27,16 +27,12 @@ import java.util.List;
 public class SelectionActivity extends AppCompatActivity {
 
 
-    private static InterstitialAd mInterstitialAd;
     ImageView logoImageView;
     List<String> listOfString;
     TextView titleTextView;
 
     HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
 
-    // private InterstitialAd mInterstitialAd;
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCompat.postponeEnterTransition(this);
@@ -69,6 +65,7 @@ public class SelectionActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finishAffinity();
+        Log.v("r_log", "(Selection activity): back pressed successfully.");
     }
 
 

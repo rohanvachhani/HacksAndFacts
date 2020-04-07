@@ -3,6 +3,7 @@ package com.rohan.hacksandfacts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -26,7 +27,6 @@ public class SplashActivity extends AppCompatActivity {
 
         logoImageView.startAnimation(animationFadeIn);
 
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -34,6 +34,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 startActivity(i);
                 finish();
+                Log.v("r_log", "Leaving the splash screen and starting the selection activity");
             }
         }, 2000);
     }

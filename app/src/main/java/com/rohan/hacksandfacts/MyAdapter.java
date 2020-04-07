@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -28,8 +29,7 @@ public class MyAdapter extends PagerAdapter {
     boolean isAnimationActive = false;
     ConstraintLayout cl1, cl2;
     float pixelDensity;
-
-
+    
     ImageButton shareButton, backButton;
     ImageView card_image;
     FrameLayout share_button_back;
@@ -49,13 +49,11 @@ public class MyAdapter extends PagerAdapter {
         final View main_view = layoutInflater.from(context).inflate(R.layout.card_layout, container, false);
         final TextView tv = main_view.findViewById(R.id.text_view_1);
         card_image = main_view.findViewById(R.id.image_view_1);
-        // back_image = main_view.findViewById(R.id.image_view_2);
 
         Typeface product_sans = Typeface.createFromAsset(context.getAssets(), "product_sans_black.ttf");
         tv.setText(listOfString.get(position));
         tv.setTypeface(product_sans);
         share_button_back = main_view.findViewById(R.id.whatsapp_button);
-        // shareAnimation = main_view.findViewById(R.id.share_animation);
 
         shareButton = main_view.findViewById(R.id.share_button);
 
@@ -64,8 +62,6 @@ public class MyAdapter extends PagerAdapter {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Log.i("button", "share button clicked");
 
                 cl1 = main_view.findViewById(R.id.first_side);
                 cl2 = main_view.findViewById(R.id.second_side);
@@ -85,6 +81,7 @@ public class MyAdapter extends PagerAdapter {
 
                 anim_effect_back_button(cl1, cl2);
                 cl1.setVisibility(View.VISIBLE);
+
             }
         });
 
