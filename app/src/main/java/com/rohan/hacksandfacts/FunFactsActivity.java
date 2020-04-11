@@ -204,7 +204,7 @@ public class FunFactsActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         myAdapter = null;
-        Runtime.getRuntime().gc();
+        System.gc();
     }
 
 

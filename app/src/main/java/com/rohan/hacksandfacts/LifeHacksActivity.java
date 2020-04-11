@@ -192,16 +192,17 @@ public class LifeHacksActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Log.v("r_log", "(Lifehacks activity): back pressed successfully.");
         super.onBackPressed();
         finish();
-        Log.v("r_log", "(Lifehacks activity): back pressed successfully.");
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         myAdapter = null;
-        Runtime.getRuntime().gc();
+        System.gc();
     }
 
 }
